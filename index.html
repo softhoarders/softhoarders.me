@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Soft Hoarders 12560 – FTC Robotics Team</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="https://soft-hoarders.com/logo.png">
   <style>
     :root {
       --bg-dark: #050608;
@@ -395,80 +394,71 @@
       overflow: hidden;
     }
 
-    .hero-robot-img-wrap {
-      height: 180px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(circle at 50% 50%, rgba(34,197,94,0.1), transparent 70%);
-      border-radius: 16px;
+    .hero-robot {
+      height: 170px;
+      border-radius: 18px;
+      border: 1px solid rgba(34,197,94,0.3);
+      background:
+        radial-gradient(circle at 20% 0, rgba(34,197,94,0.15), transparent 40%),
+        radial-gradient(circle at 82% 100%, rgba(8,47,73,0.7), #020617 70%);
+      position: relative;
       overflow: hidden;
     }
 
-    .hero-robot-img {
-      max-height: 100%;
-      object-fit: contain;
-      filter: drop-shadow(0 0 20px rgba(34,197,94,0.4));
-      transition: transform 0.5s cubic-bezier(0.2, 0, 0.2, 1);
+    .hero-robot::after {
+      content: "";
+      position: absolute;
+      inset: 18px 12px;
+      border-radius: 16px;
+      border: 1px dashed rgba(34,197,94,0.5);
+      opacity: 0.7;
     }
 
-    .hero-visual:hover .hero-robot-img {
-      transform: scale(1.08) translateY(-5px);
+    .hero-robot-center {
+      position: absolute;
+      inset: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .location-link::after {
-      content: "🌍";
-      margin-left: 8px;
-      display: inline-block;
-      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    .robot-core {
+      width: 150px;
+      height: 150px;
+      border-radius: 40%;
+      background:
+        radial-gradient(circle at 30% 20%, #bbf7d0 0, #22c55e 28%, #14532d 60%, #020617 100%);
+      box-shadow:
+        0 0 80px rgba(34,197,94,0.45),
+        0 24px 40px rgba(0,0,0,0.75);
+      position: relative;
     }
 
-    .location-link:hover::after {
-      transform: scale(3) rotate(360deg);
-      opacity: 0;
+    .robot-core::before,
+    .robot-core::after {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border-radius: 38%;
+      border: 1px solid rgba(15,23,42,0.85);
+      box-shadow:
+        0 0 0 1px rgba(34,197,94,0.45),
+        0 0 40px rgba(34,197,94,0.3) inset;
     }
 
-    /* API Competitions */
-    .api-timeline {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin-top: 20px;
+    .robot-orbit {
+      position: absolute;
+      inset: -6px;
+      border-radius: 44%;
+      border: 1px dashed rgba(34,197,94,0.6);
+      border-top-color: transparent;
+      border-right-color: transparent;
+      animation: orbit-spin 20s linear infinite;
     }
 
-    .api-item {
-      padding: 16px;
-      border-radius: 12px;
-      background: rgba(15,23,42,0.5);
-      border: 1px solid rgba(34,197,94,0.15);
-      transition: all 0.3s ease;
-    }
-
-    .api-item:hover {
-      border-color: var(--accent);
-      background: rgba(34,197,94,0.05);
-      transform: translateY(-4px);
-    }
-
-    .api-item-name {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-main);
-      margin-bottom: 4px;
-    }
-
-    .api-item-rank {
-      font-size: 11px;
-      color: var(--accent-soft);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .api-loading {
-      text-align: center;
-      padding: 20px;
-      color: var(--text-muted);
-      font-style: italic;
+    @keyframes orbit-spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
     .hero-visual-footer {
@@ -808,7 +798,7 @@
   <header>
     <div class="nav-inner">
       <div class="logo-mark">
-        <img src="https://soft-hoarders.com/logo.png" alt="SH Logo" style="width: 32px; height: 32px; border-radius: 8px; box-shadow: 0 4px 12px rgba(34,197,94,0.3);">
+        <div class="logo-icon">S</div>
         <div>
           <div class="logo-text-main">SOFT HOARDERS</div>
           <div class="logo-text-sub">12560 · RO031</div>
@@ -845,7 +835,7 @@
             </div>
 
             <h1 class="hero-title">
-              <span data-i18n="hero.title1">It's not about</span> <span class="hero-emphasis" data-i18n="hero.title2">wires.</span>
+              <span data-i18n="hero.title1">It's not about</span> <span class="break hero-emphasis" data-i18n="hero.title2">wires.</span>
               <span class="break"><span data-i18n="hero.title3">It's about</span> <span class="hero-emphasis" data-i18n="hero.title4">connections.</span></span>
             </h1>
 
@@ -865,9 +855,9 @@
               <button class="btn-primary" data-scroll="#goals" data-i18n="hero.explore">
                 Explore
               </button>
-              <a href="https://www.google.com/maps/place/Colegiul+Na%C8%9Bional+%E2%80%9EFra%C8%9Bii+Buze%C8%99ti%E2%80%9D/@44.316834,23.794697,17z" target="_blank" class="btn-ghost location-link" data-i18n="hero.findus">
+              <button class="btn-ghost" data-scroll="#contact" data-i18n="hero.findus">
                 Find us on the map
-              </a>
+              </button>
             </div>
 
             <div class="hero-note" data-i18n="hero.note">
@@ -878,11 +868,15 @@
 
           <div class="hero-visual-wrap">
             <div class="hero-visual">
-              <div class="badge-code">FTC · 2025–2026</div>
-              <div class="hero-visual-title" data-i18n="hero.robot">Robot System · DECODE</div>
+              <div class="badge-code">FTC · 2024–2025</div>
+              <div class="hero-visual-title" data-i18n="hero.robot">Robot System · SH-25</div>
               <div class="hero-visual-main">
-                <div class="hero-robot-img-wrap">
-                  <img src="https://soft-hoarders.com/IntoTheDeepRobot.png" alt="FTC Robot" class="hero-robot-img">
+                <div class="hero-robot">
+                  <div class="hero-robot-center">
+                    <div class="robot-core">
+                      <div class="robot-orbit"></div>
+                    </div>
+                  </div>
                 </div>
                 <div class="hero-visual-footer">
                   <div>
@@ -985,11 +979,7 @@
         <div class="section-label" data-i18n="competitions.label">Recent Competitions</div>
         <h2 class="section-title" data-i18n="competitions.title">Where we competed recently</h2>
 
-        <div id="api-competitions-root">
-          <div class="api-loading">Fetching latest data from FTCScout...</div>
-        </div>
-
-        <div class="timeline" style="margin-top: 32px; opacity: 0.6;">
+        <div class="timeline">
           <article class="timeline-item">
             <h3 class="timeline-title" data-i18n="competitions.item1.title">Romanian National Championship</h3>
             <div class="timeline-meta" data-i18n="competitions.item1.meta">Nationals · Romania</div>
@@ -1033,9 +1023,9 @@
             <p data-i18n="sponsors.cta">
               Interested in sponsoring our team? We'd love to hear from you.
             </p>
-            <a href="mailto:contact@soft-hoarders.com" class="btn-ghost" data-i18n="sponsors.button">
+            <button class="btn-ghost" data-scroll="#contact" data-i18n="sponsors.button">
               Get in Touch
-            </a>
+            </button>
           </div>
         </div>
       </section>
@@ -1050,13 +1040,13 @@
           learn more about FTC.
         </p>
         <div class="contact-grid">
-          <a href="https://www.google.com/maps/place/Colegiul+Na%C8%9Bional+%E2%80%9EFra%C8%9Bii+Buze%C8%99ti%E2%80%9D/@44.316834,23.794697,17z" target="_blank" class="contact-card location-link" style="display: block;">
+          <div class="contact-card">
             <h3 data-i18n="contact.location.title">Location</h3>
             <p data-i18n="contact.location.body">
               "Frații Buzești" National College<br>
               Strada Unirii 14-16, Craiova 200410, Romania
             </p>
-          </a>
+          </div>
           <div class="contact-card">
             <h3 data-i18n="contact.social.title">Follow Us</h3>
             <div class="social-links">
@@ -1073,8 +1063,7 @@
 
   <footer>
     <div class="footer-inner">
-      <div>© <span id="current-year"></span> Soft Hoarders 12560. <span data-i18n="footer.rights">All rights reserved.</span></div>
-      <div data-i18n="footer.made_with">made with 💚 in Romania</div>
+      <div>© 2025 Soft Hoarders 12560. <span data-i18n="footer.rights">All rights reserved.</span></div>
       <div class="footer-links">
         <a href="https://www.instagram.com/soft.hoarders/" target="_blank" rel="noreferrer">Instagram</a>
         <a href="https://www.facebook.com/SoftHoarders" target="_blank" rel="noreferrer">Facebook</a>
@@ -1096,8 +1085,8 @@
       'nav.contact': 'Contact',
       'hero.eyebrow': 'FTC Robotics Team',
       'hero.location': 'Craiova · Romania',
-      'hero.title1': "It's not about wires.",
-      'hero.title2': '',
+      'hero.title1': "It's not about",
+      'hero.title2': 'wires.',
       'hero.title3': "It's about",
       'hero.title4': 'connections.',
       'hero.subtitle': 'We are a FIRST Tech Challenge robotics team from "Frații Buzești" National College, Craiova, building robots and a stronger STEM community.',
@@ -1107,7 +1096,7 @@
       'hero.explore': 'Explore',
       'hero.findus': 'Find us on the map',
       'hero.note': 'Qualified for the European Premier Event <strong>2025</strong>, representing Romania on the international stage for the third time.',
-      'hero.robot': 'Robot System · DECODE',
+      'hero.robot': 'Robot System · SH-25',
       'hero.status': 'Control Hub Status',
       'hero.ready': 'CONNECTED · MATCH READY',
       'goals.label': 'Goals',
@@ -1131,8 +1120,8 @@
       'achievements.stat3.kicker': 'Outreach',
       'achievements.stat3.number': '57+ events · 24–25',
       'achievements.stat3.body': 'From local workshops to international collaborations, we commit to growing the global FTC community.',
-      'competitions.label': 'Live Performances (FTCScout)',
-      'competitions.title': 'Our last 5 competitions',
+      'competitions.label': 'Recent Competitions',
+      'competitions.title': 'Where we competed recently',
       'competitions.item1.title': 'Romanian National Championship',
       'competitions.item1.meta': 'Nationals · Romania',
       'competitions.item1.body': 'Qualified for the 9th consecutive year since 2016 and received the Connect Award 1 for our impact beyond the field.',
@@ -1153,8 +1142,7 @@
       'contact.location.title': 'Location',
       'contact.location.body': '"Frații Buzești" National College<br>Strada Unirii 14-16, Craiova 200410, Romania',
       'contact.social.title': 'Follow Us',
-      'footer.rights': 'All rights reserved.',
-      'footer.made_with': 'made with 💚 in Romania'
+      'footer.rights': 'All rights reserved.'
     },
     ro: {
       'nav.goals': 'Obiective',
@@ -1164,8 +1152,8 @@
       'nav.contact': 'Contact',
       'hero.eyebrow': 'Echipa de Robotică FTC',
       'hero.location': 'Craiova · România',
-      'hero.title1': 'Nu este despre fire.',
-      'hero.title2': '',
+      'hero.title1': 'Nu este despre',
+      'hero.title2': 'fire.',
       'hero.title3': 'Este despre',
       'hero.title4': 'conexiuni.',
       'hero.subtitle': 'Suntem o echipă FIRST Tech Challenge de la Colegiul Național "Frații Buzești", Craiova, construind roboți și o comunitate STEM mai puternică.',
@@ -1175,7 +1163,7 @@
       'hero.explore': 'Descoperă',
       'hero.findus': 'Găsește-ne pe hartă',
       'hero.note': 'Calificată pentru Evenimentul Premier European <strong>2025</strong>, reprezentând România pe scena internațională pentru a treia oară.',
-      'hero.robot': 'Sistem Robot · DECODE',
+      'hero.robot': 'Sistem Robot · SH-25',
       'hero.status': 'Status Control Hub',
       'hero.ready': 'CONECTAT · PREGĂTIT',
       'goals.label': 'Obiective',
@@ -1199,8 +1187,8 @@
       'achievements.stat3.kicker': 'Implicare',
       'achievements.stat3.number': '57+ evenimente · 24–25',
       'achievements.stat3.body': 'De la ateliere locale la colaborări internaționale, ne angajăm să creștem comunitatea FTC globală.',
-      'competitions.label': 'Performanțe Live (FTCScout)',
-      'competitions.title': 'Ultimele 5 competiții',
+      'competitions.label': 'Competiții Recente',
+      'competitions.title': 'Unde am competitat recent',
       'competitions.item1.title': 'Campionatul Național Românesc',
       'competitions.item1.meta': 'Naționale · România',
       'competitions.item1.body': 'Calificată pentru al 9-lea an consecutiv din 2016 și am primit Connect Award 1 pentru impactul nostru dincolo de teren.',
@@ -1221,8 +1209,7 @@
       'contact.location.title': 'Locație',
       'contact.location.body': 'Colegiul Național "Frații Buzești"<br>Strada Unirii 14-16, Craiova 200410, România',
       'contact.social.title': 'Urmărește-ne',
-      'footer.rights': 'Toate drepturile rezervate.',
-      'footer.made_with': 'făcut cu 💚 în România'
+      'footer.rights': 'Toate drepturile rezervate.'
     }
   };
 
@@ -1255,59 +1242,17 @@
     });
   });
 
-  // Adaptive Year
-  document.getElementById('current-year').textContent = new Date().getFullYear();
-
-  // FTCScout API Integration
-  async function fetchCompetitions() {
-    const root = document.getElementById('api-competitions-root');
-    try {
-      const response = await fetch('https://api.ftcscout.org/v1/teams/12560/events/2024');
-      if (!response.ok) throw new Error('API error');
-      const events = await response.json();
-      
-      // Sort by date (desc) and take last 5
-      const recentEvents = events
-        .sort((a, b) => new Date(b.start) - new Date(a.start))
-        .slice(0, 5);
-
-      if (recentEvents.length === 0) {
-        root.innerHTML = '<div class="api-loading">No recent event data found.</div>';
-        return;
-      }
-
-      root.innerHTML = `<div class="api-timeline">
-        ${recentEvents.map(ev => `
-          <div class="api-item">
-            <div class="api-item-name">${ev.name}</div>
-            <div class="api-item-rank">
-              ${ev.location.city}, ${ev.location.country}
-            </div>
-          </div>
-        `).join('')}
-      </div>`;
-    } catch (err) {
-      root.innerHTML = '<div class="api-loading">Unable to load live performance data.</div>';
-      console.error(err);
-    }
-  }
-
-  fetchCompetitions();
-
   // Smooth scroll for nav buttons/links
-  document.querySelectorAll("[data-scroll], a[href^='#']").forEach(function(el) {
+  document.querySelectorAll("[data-scroll], header a[href^='#']").forEach(function(el) {
     el.addEventListener("click", function (e) {
-      const href = this.getAttribute("href");
-      if (href && href.startsWith("#")) {
-        e.preventDefault();
-        var target = this.getAttribute("data-scroll") || href;
-        var node = document.querySelector(target);
-        if (!node) return;
-        window.scrollTo({
-          top: node.offsetTop - 80,
-          behavior: "smooth"
-        });
-      }
+      e.preventDefault();
+      var target = this.getAttribute("data-scroll") || this.getAttribute("href");
+      var node = document.querySelector(target);
+      if (!node) return;
+      window.scrollTo({
+        top: node.offsetTop - 80,
+        behavior: "smooth"
+      });
     });
   });
 

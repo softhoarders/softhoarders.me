@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title>Soft Hoarders 12560 – FTC Robotics Team</title>
+  <title>Soft Hoarders</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Soft Hoarders – FTC Robotics Team 12560 from Craiova, Romania. Building robots and a stronger STEM community since 2016. Qualified for European Premier Event 2025.">
+  <link rel="icon" type="image/png" href="https://soft-hoarders.com/logo.png">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
     :root {
       --bg-dark: #050608;
@@ -18,9 +24,9 @@
       --max-width: 1120px;
       --radius-lg: 18px;
       --radius-pill: 999px;
-      --shadow-soft: 0 18px 45px rgba(0,0,0,0.5);
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.5);
       --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-                   "Segoe UI", sans-serif;
+        "Segoe UI", sans-serif;
     }
 
     * {
@@ -67,13 +73,11 @@
       top: 0;
       z-index: 20;
       backdrop-filter: blur(16px);
-      background: linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.75),
-        rgba(0,0,0,0.4),
-        transparent
-      );
-      border-bottom: 1px solid rgba(34,197,94,0.12);
+      background: linear-gradient(to bottom,
+          rgba(0, 0, 0, 0.75),
+          rgba(0, 0, 0, 0.4),
+          transparent);
+      border-bottom: 1px solid rgba(34, 197, 94, 0.12);
     }
 
     .nav-inner {
@@ -96,14 +100,14 @@
       width: 32px;
       height: 32px;
       border-radius: 12px;
-      background: radial-gradient(circle at 30% 20%, #bbf7d0 0, #22c55e 35%, #14532d 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 8px 24px rgba(34,197,94,0.4);
-      font-size: 18px;
-      font-weight: 700;
-      color: #022c22;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(34, 197, 94, 0.4);
+    }
+
+    .logo-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .logo-text-main {
@@ -145,16 +149,16 @@
 
     .nav-links a:hover {
       color: var(--text-main);
-      border-color: rgba(34,197,94,0.3);
-      background: rgba(34,197,94,0.08);
+      border-color: rgba(34, 197, 94, 0.3);
+      background: rgba(34, 197, 94, 0.08);
     }
 
     /* Language Toggle */
     .lang-toggle {
       display: flex;
-      background: rgba(15,23,42,0.9);
+      background: rgba(15, 23, 42, 0.9);
       border-radius: var(--radius-pill);
-      border: 1px solid rgba(148,163,184,0.3);
+      border: 1px solid rgba(148, 163, 184, 0.3);
       overflow: hidden;
     }
 
@@ -183,8 +187,8 @@
     .nav-cta {
       padding: 6px 14px;
       border-radius: var(--radius-pill);
-      border: 1px solid rgba(34,197,94,0.4);
-      background: radial-gradient(circle at top left, rgba(34,197,94,0.14), transparent 55%);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.14), transparent 55%);
       font-size: 12px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -198,7 +202,7 @@
       height: 6px;
       border-radius: 999px;
       background: #22c55e;
-      box-shadow: 0 0 0 6px rgba(34,197,94,0.25);
+      box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.25);
     }
 
     /* Hero */
@@ -220,7 +224,7 @@
 
     @media (max-width: 900px) {
       .hero-grid {
-        grid-template-columns: minmax(0,1fr);
+        grid-template-columns: minmax(0, 1fr);
       }
     }
 
@@ -230,8 +234,8 @@
       gap: 10px;
       padding: 4px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(34,197,94,0.28);
-      background: radial-gradient(circle at left, rgba(34,197,94,0.18), transparent 60%);
+      border: 1px solid rgba(34, 197, 94, 0.28);
+      background: radial-gradient(circle at left, rgba(34, 197, 94, 0.18), transparent 60%);
       font-size: 11px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -242,8 +246,8 @@
     .eyebrow-pill {
       padding: 2px 8px;
       border-radius: 999px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(34,197,94,0.4);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(34, 197, 94, 0.4);
       font-size: 10px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -264,6 +268,7 @@
     .hero-emphasis {
       background: linear-gradient(120deg, #bbf7d0, #22c55e, #16a34a);
       -webkit-background-clip: text;
+      background-clip: text;
       color: transparent;
     }
 
@@ -316,7 +321,7 @@
     .btn-primary {
       background: radial-gradient(circle at 0 0, #bbf7d0 0, #22c55e 35%, #16a34a 85%);
       color: #022c22;
-      box-shadow: 0 16px 38px rgba(34,197,94,0.32);
+      box-shadow: 0 16px 38px rgba(34, 197, 94, 0.32);
     }
 
     .btn-primary:hover {
@@ -324,14 +329,14 @@
     }
 
     .btn-ghost {
-      border-color: rgba(34,197,94,0.45);
-      background: rgba(15,23,42,0.9);
+      border-color: rgba(34, 197, 94, 0.45);
+      background: rgba(15, 23, 42, 0.9);
       color: var(--text-main);
     }
 
     .btn-ghost:hover {
-      border-color: rgba(74,222,128,0.7);
-      background: rgba(17,24,39,1);
+      border-color: rgba(74, 222, 128, 0.7);
+      background: rgba(17, 24, 39, 1);
     }
 
     .hero-note {
@@ -357,7 +362,7 @@
       border-radius: 28px;
       padding: 18px 18px 20px;
       background: radial-gradient(circle at 0 0, #0a1a0f 0, #020617 52%, #000 100%);
-      border: 1px solid rgba(34,197,94,0.28);
+      border: 1px solid rgba(34, 197, 94, 0.28);
       box-shadow: var(--shadow-soft);
       position: relative;
       overflow: hidden;
@@ -369,8 +374,8 @@
       right: 18px;
       padding: 4px 10px;
       border-radius: 999px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(34,197,94,0.5);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(34, 197, 94, 0.5);
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.16em;
@@ -388,77 +393,32 @@
     .hero-visual-main {
       border-radius: 22px;
       background: radial-gradient(circle at 20% 0, #0f2918 0, #020617 55%);
-      border: 1px solid rgba(34,197,94,0.5);
+      border: 1px solid rgba(34, 197, 94, 0.5);
       padding: 18px;
       position: relative;
       overflow: hidden;
     }
 
     .hero-robot {
-      height: 170px;
       border-radius: 18px;
-      border: 1px solid rgba(34,197,94,0.3);
+      border: 1px solid rgba(34, 197, 94, 0.3);
       background:
-        radial-gradient(circle at 20% 0, rgba(34,197,94,0.15), transparent 40%),
-        radial-gradient(circle at 82% 100%, rgba(8,47,73,0.7), #020617 70%);
+        radial-gradient(circle at 20% 0, rgba(34, 197, 94, 0.15), transparent 40%),
+        radial-gradient(circle at 82% 100%, rgba(8, 47, 73, 0.7), #020617 70%);
       position: relative;
       overflow: hidden;
-    }
-
-    .hero-robot::after {
-      content: "";
-      position: absolute;
-      inset: 18px 12px;
-      border-radius: 16px;
-      border: 1px dashed rgba(34,197,94,0.5);
-      opacity: 0.7;
-    }
-
-    .hero-robot-center {
-      position: absolute;
-      inset: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 12px;
     }
 
-    .robot-core {
-      width: 150px;
-      height: 150px;
-      border-radius: 40%;
-      background:
-        radial-gradient(circle at 30% 20%, #bbf7d0 0, #22c55e 28%, #14532d 60%, #020617 100%);
-      box-shadow:
-        0 0 80px rgba(34,197,94,0.45),
-        0 24px 40px rgba(0,0,0,0.75);
-      position: relative;
-    }
-
-    .robot-core::before,
-    .robot-core::after {
-      content: "";
-      position: absolute;
-      inset: 12px;
-      border-radius: 38%;
-      border: 1px solid rgba(15,23,42,0.85);
-      box-shadow:
-        0 0 0 1px rgba(34,197,94,0.45),
-        0 0 40px rgba(34,197,94,0.3) inset;
-    }
-
-    .robot-orbit {
-      position: absolute;
-      inset: -6px;
-      border-radius: 44%;
-      border: 1px dashed rgba(34,197,94,0.6);
-      border-top-color: transparent;
-      border-right-color: transparent;
-      animation: orbit-spin 20s linear infinite;
-    }
-
-    @keyframes orbit-spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+    .hero-robot img {
+      width: 100%;
+      max-height: 260px;
+      object-fit: contain;
+      border-radius: 12px;
+      filter: drop-shadow(0 0 30px rgba(34, 197, 94, 0.3));
     }
 
     .hero-visual-footer {
@@ -484,8 +444,8 @@
     .chip {
       padding: 3px 9px;
       border-radius: 999px;
-      border: 1px solid rgba(34,197,94,0.4);
-      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      background: rgba(15, 23, 42, 0.9);
       color: var(--accent-soft);
       font-size: 10px;
       text-transform: uppercase;
@@ -523,13 +483,13 @@
 
     .cards-3 {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
     }
 
     @media (max-width: 900px) {
       .cards-3 {
-        grid-template-columns: minmax(0,1fr);
+        grid-template-columns: minmax(0, 1fr);
       }
     }
 
@@ -537,15 +497,15 @@
       border-radius: var(--radius-lg);
       padding: 18px 18px 20px;
       background: radial-gradient(circle at top, #0a1a0f 0, #020617 50%, #000 100%);
-      border: 1px solid rgba(34,197,94,0.2);
-      box-shadow: 0 14px 36px rgba(0,0,0,0.6);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.6);
       position: relative;
       overflow: hidden;
       transition: border-color 0.3s ease, transform 0.3s ease;
     }
 
     .card:hover {
-      border-color: rgba(34,197,94,0.4);
+      border-color: rgba(34, 197, 94, 0.4);
       transform: translateY(-2px);
     }
 
@@ -571,28 +531,28 @@
 
     .stats {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
       margin-top: 10px;
     }
 
     @media (max-width: 900px) {
       .stats {
-        grid-template-columns: minmax(0,1fr);
+        grid-template-columns: minmax(0, 1fr);
       }
     }
 
     .stat {
       border-radius: var(--radius-lg);
       padding: 18px 18px 20px;
-      border: 1px solid rgba(34,197,94,0.2);
-      background: radial-gradient(circle at top left, rgba(34,197,94,0.08), #020617 70%);
-      box-shadow: 0 14px 36px rgba(0,0,0,0.6);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.08), #020617 70%);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.6);
       transition: border-color 0.3s ease;
     }
 
     .stat:hover {
-      border-color: rgba(34,197,94,0.4);
+      border-color: rgba(34, 197, 94, 0.4);
     }
 
     .stat-kicker {
@@ -618,28 +578,28 @@
 
     .timeline {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
       margin-top: 8px;
     }
 
     @media (max-width: 900px) {
       .timeline {
-        grid-template-columns: minmax(0,1fr);
+        grid-template-columns: minmax(0, 1fr);
       }
     }
 
     .timeline-item {
       border-radius: var(--radius-lg);
       padding: 16px 18px 18px;
-      border: 1px solid rgba(34,197,94,0.2);
-      background: radial-gradient(circle at bottom right, rgba(34,197,94,0.15), #020617 68%);
-      box-shadow: 0 14px 36px rgba(0,0,0,0.6);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      background: radial-gradient(circle at bottom right, rgba(34, 197, 94, 0.15), #020617 68%);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.6);
       transition: border-color 0.3s ease;
     }
 
     .timeline-item:hover {
-      border-color: rgba(34,197,94,0.4);
+      border-color: rgba(34, 197, 94, 0.4);
     }
 
     .timeline-title {
@@ -665,9 +625,9 @@
     .sponsors-wrap {
       border-radius: 22px;
       padding: 20px;
-      border: 1px solid rgba(34,197,94,0.2);
-      background: radial-gradient(circle at top, rgba(10,26,15,1), #020617 70%);
-      box-shadow: 0 18px 46px rgba(0,0,0,0.75);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      background: radial-gradient(circle at top, rgba(10, 26, 15, 1), #020617 70%);
+      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.75);
     }
 
     .sponsors-contact {
@@ -691,16 +651,17 @@
 
     @media (max-width: 900px) {
       .contact-grid {
-        grid-template-columns: minmax(0,1fr);
+        grid-template-columns: minmax(0, 1fr);
       }
     }
 
     .contact-card {
       border-radius: var(--radius-lg);
       padding: 20px;
-      border: 1px solid rgba(34,197,94,0.2);
+      border: 1px solid rgba(34, 197, 94, 0.2);
       background: radial-gradient(circle at top, #0a1a0f 0, #020617 70%);
-      box-shadow: 0 14px 36px rgba(0,0,0,0.6);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
     }
 
     .contact-card h3 {
@@ -712,6 +673,317 @@
     .contact-card p {
       font-size: 0.94rem;
       color: var(--text-muted);
+    }
+
+    .location-card-inner {
+      position: relative;
+    }
+
+    #locationMap {
+      width: 100%;
+      height: 200px;
+      border-radius: 14px;
+      margin-bottom: 14px;
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      z-index: 1;
+    }
+
+    #locationMap .leaflet-control-attribution {
+      font-size: 9px;
+      background: rgba(0, 0, 0, 0.6) !important;
+      color: #94a3b8 !important;
+    }
+
+    #locationMap .leaflet-control-attribution a {
+      color: #22c55e !important;
+    }
+
+    /* Recent Results */
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .result-card {
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      border: 1px solid rgba(34, 197, 94, 0.15);
+      background:
+        radial-gradient(circle at 10% 0, rgba(34, 197, 94, 0.08), transparent 45%),
+        #050e17;
+      transition: border-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .result-card:hover {
+      border-color: rgba(34, 197, 94, 0.35);
+      transform: translateY(-2px);
+    }
+
+    .result-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .result-card-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin: 0 0 4px;
+    }
+
+    .result-card-meta {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .result-rank {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .result-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .result-stat {
+      text-align: center;
+      padding: 10px 6px;
+      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(34, 197, 94, 0.08);
+    }
+
+    .result-stat-value {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--accent-soft);
+    }
+
+    .result-stat-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .result-wlt {
+      display: flex;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .result-wlt-item {
+      flex: 1;
+      text-align: center;
+      padding: 6px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .result-wlt-w {
+      background: rgba(34, 197, 94, 0.12);
+      color: #22c55e;
+    }
+
+    .result-wlt-l {
+      background: rgba(239, 68, 68, 0.12);
+      color: #ef4444;
+    }
+
+    .result-wlt-t {
+      background: rgba(234, 179, 8, 0.12);
+      color: #eab308;
+    }
+
+    .results-loading {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+      grid-column: 1 / -1;
+    }
+
+    .results-loading .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid rgba(34, 197, 94, 0.2);
+      border-top-color: #22c55e;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 12px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .result-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 14px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+
+    .result-link:hover {
+      opacity: 1;
+    }
+
+    /* Team Section */
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .team-member {
+      border-radius: var(--radius-lg);
+      padding: 24px 16px 20px;
+      border: 1px solid rgba(34, 197, 94, 0.12);
+      background: rgba(5, 14, 23, 0.8);
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+      transition: border-color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .team-member:hover,
+    .team-member.expanded {
+      border-color: rgba(34, 197, 94, 0.45);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(34, 197, 94, 0.1);
+      z-index: 50;
+    }
+
+    .team-member-desc {
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 50%;
+      width: min(500px, calc(100vw - 48px));
+      background: linear-gradient(145deg, #0c1922, #090f0c);
+      border: 1px solid rgba(34, 197, 94, 0.28);
+      border-radius: 14px;
+      padding: 18px 22px;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      text-align: left;
+      box-shadow: 0 28px 64px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(34, 197, 94, 0.05);
+      z-index: 100;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateX(-50%) translateY(-10px);
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+
+    /* Edge-card alignment fixes */
+    .team-member.pop-left .team-member-desc {
+      left: 0;
+      transform: translateY(-10px);
+    }
+    .team-member.pop-right .team-member-desc {
+      left: auto;
+      right: 0;
+      transform: translateY(-10px);
+    }
+
+    .team-member-desc::before {
+      content: '';
+      position: absolute;
+      top: -7px;
+      left: calc(50% - 6px);
+      width: 12px;
+      height: 12px;
+      background: #0c1922;
+      border-left: 1px solid rgba(34, 197, 94, 0.28);
+      border-top: 1px solid rgba(34, 197, 94, 0.28);
+      transform: rotate(45deg);
+    }
+    .team-member.pop-left .team-member-desc::before {
+      left: var(--card-arrow, 90px);
+    }
+    .team-member.pop-right .team-member-desc::before {
+      left: auto;
+      right: var(--card-arrow, 90px);
+    }
+
+    .team-member:hover .team-member-desc,
+    .team-member.expanded .team-member-desc {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+      pointer-events: auto;
+    }
+    .team-member.pop-left:hover .team-member-desc,
+    .team-member.pop-left.expanded .team-member-desc {
+      transform: translateY(0);
+    }
+    .team-member.pop-right:hover .team-member-desc,
+    .team-member.pop-right.expanded .team-member-desc {
+      transform: translateY(0);
+    }
+
+    .team-member-avatar {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      margin: 0 auto 14px;
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.22), rgba(8, 47, 73, 0.65));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      border: 2px solid rgba(34, 197, 94, 0.2);
+      transition: border-color 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .team-member:hover .team-member-avatar,
+    .team-member.expanded .team-member-avatar {
+      border-color: rgba(34, 197, 94, 0.55);
+      box-shadow: 0 0 22px rgba(34, 197, 94, 0.22);
+    }
+
+    .team-member-name {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 2px;
+    }
+
+    .team-member-role {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
     .social-links {
@@ -726,8 +998,8 @@
       gap: 8px;
       padding: 8px 14px;
       border-radius: var(--radius-pill);
-      border: 1px solid rgba(34,197,94,0.3);
-      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      background: rgba(15, 23, 42, 0.9);
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 0.1em;
@@ -738,13 +1010,13 @@
     .social-link:hover {
       border-color: var(--accent);
       color: var(--accent-soft);
-      background: rgba(34,197,94,0.1);
+      background: rgba(34, 197, 94, 0.1);
     }
 
     /* Footer */
 
     footer {
-      border-top: 1px solid rgba(34,197,94,0.2);
+      border-top: 1px solid rgba(34, 197, 94, 0.2);
       padding: 20px 0 26px;
       margin-top: 48px;
       background: radial-gradient(circle at top, #0a1a0f, #000);
@@ -792,483 +1064,768 @@
       transform: translateY(0);
     }
   </style>
+
+  <script>
+    // Fetch FTC Scout data as early as possible
+    window.ftcScoutPromise = fetch('https://api.ftcscout.org/graphql', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query: '{ teamByNumber(number: 12560) { events(season: 2025) { eventCode event { name start end location { city state country } } stats { ... on TeamEventStats2025 { opr { totalPointsNp } rank wins losses ties qualMatchesPlayed } } } } }' })
+    }).then(r => r.json());
+  </script>
 </head>
+
 <body>
-<div class="page">
-  <header>
-    <div class="nav-inner">
-      <div class="logo-mark">
-        <div class="logo-icon">S</div>
-        <div>
-          <div class="logo-text-main">SOFT HOARDERS</div>
-          <div class="logo-text-sub">12560 · RO031</div>
-        </div>
-      </div>
-      <div class="nav-right">
-        <nav class="nav-links">
-          <a href="#goals" data-i18n="nav.goals">Goals</a>
-          <a href="#achievements" data-i18n="nav.achievements">Achievements</a>
-          <a href="#competitions" data-i18n="nav.competitions">Competitions</a>
-          <a href="#sponsors" data-i18n="nav.sponsors">Sponsors</a>
-        </nav>
-        <div class="lang-toggle">
-          <button class="lang-btn active" data-lang="en">EN</button>
-          <button class="lang-btn" data-lang="ro">RO</button>
-        </div>
-        <a href="#contact" class="nav-cta">
-          <span class="nav-cta-dot"></span>
-          <span data-i18n="nav.contact">Contact</span>
-        </a>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <div class="shell">
-      <!-- Hero -->
-      <section class="hero fade-in">
-        <div class="hero-grid">
+  <div class="page">
+    <header>
+      <div class="nav-inner">
+        <div class="logo-mark">
+          <div class="logo-icon"><img src="https://soft-hoarders.com/logo.png" alt="Soft Hoarders Logo"></div>
           <div>
-            <div class="eyebrow">
-              <span data-i18n="hero.eyebrow">FTC Robotics Team</span>
-              <span class="eyebrow-pill" data-i18n="hero.location">Craiova · Romania</span>
-            </div>
-
-            <h1 class="hero-title">
-              <span data-i18n="hero.title1">It's not about</span> <span class="break hero-emphasis" data-i18n="hero.title2">wires.</span>
-              <span class="break"><span data-i18n="hero.title3">It's about</span> <span class="hero-emphasis" data-i18n="hero.title4">connections.</span></span>
-            </h1>
-
-            <p class="hero-subtitle" data-i18n="hero.subtitle">
-              We are a FIRST Tech Challenge robotics team from
-              "Frații Buzești" National College, Craiova, building robots and
-              a stronger STEM community.
-            </p>
-
-            <div class="hero-meta">
-              <span><span data-i18n="hero.team">Team</span> <strong>12560</strong></span>
-              <span><span data-i18n="hero.league">League</span> <strong>RO031</strong></span>
-              <span><span data-i18n="hero.since">Since</span> <strong>2016</strong></span>
-            </div>
-
-            <div class="hero-actions">
-              <button class="btn-primary" data-scroll="#goals" data-i18n="hero.explore">
-                Explore
-              </button>
-              <button class="btn-ghost" data-scroll="#contact" data-i18n="hero.findus">
-                Find us on the map
-              </button>
-            </div>
-
-            <div class="hero-note" data-i18n="hero.note">
-              Qualified for the European Premier Event <strong>2025</strong>,
-              representing Romania on the international stage for the third time.
-            </div>
+            <div class="logo-text-main">SOFT HOARDERS</div>
+            <div class="logo-text-sub">12560 · RO031</div>
           </div>
+        </div>
+        <div class="nav-right">
+          <nav class="nav-links">
+            <a href="#goals" data-i18n="nav.goals">Goals</a>
+            <a href="#achievements" data-i18n="nav.achievements">Achievements</a>
+            <a href="#competitions" data-i18n="nav.competitions">Competitions</a>
+            <a href="#results" data-i18n="nav.results">Results</a>
+            <a href="#sponsors" data-i18n="nav.sponsors">Sponsors</a>
+            <a href="#team" data-i18n="nav.team">Team</a>
+          </nav>
+          <div class="lang-toggle">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="ro">RO</button>
+          </div>
+          <a href="#contact" class="nav-cta">
+            <span class="nav-cta-dot"></span>
+            <span data-i18n="nav.contact">Contact</span>
+          </a>
+        </div>
+      </div>
+    </header>
 
-          <div class="hero-visual-wrap">
-            <div class="hero-visual">
-              <div class="badge-code">FTC · 2024–2025</div>
-              <div class="hero-visual-title" data-i18n="hero.robot">Robot System · SH-25</div>
-              <div class="hero-visual-main">
-                <div class="hero-robot">
-                  <div class="hero-robot-center">
-                    <div class="robot-core">
-                      <div class="robot-orbit"></div>
+    <main>
+      <div class="shell">
+        <!-- Hero -->
+        <section class="hero fade-in">
+          <div class="hero-grid">
+            <div>
+              <div class="eyebrow">
+                <span data-i18n="hero.eyebrow">FTC Robotics Team</span>
+                <span class="eyebrow-pill" data-i18n="hero.location">Craiova · Romania</span>
+              </div>
+
+              <h1 class="hero-title">
+                <span data-i18n="hero.title1">It's not about</span> <span class="hero-emphasis"
+                  data-i18n="hero.title2">wires.</span>
+                <span class="break"><span data-i18n="hero.title3">It's about</span> <span class="hero-emphasis"
+                    data-i18n="hero.title4">connections.</span></span>
+              </h1>
+
+              <p class="hero-subtitle" data-i18n="hero.subtitle">
+                We are the FIRST Tech Challenge robotics team from
+                "Frații Buzești" National College, Craiova, building robots and
+                a stronger STEM community.
+              </p>
+
+              <div class="hero-meta">
+                <span><span data-i18n="hero.team">Team</span> <strong>12560 | RO031</strong></span>
+                <span><span data-i18n="hero.league">League</span> <strong>FTC</strong></span>
+                <span><span data-i18n="hero.since">Since</span> <strong>2016</strong></span>
+              </div>
+
+              <div class="hero-actions">
+                <button class="btn-primary" data-scroll="#goals" data-i18n="hero.explore">
+                  Explore
+                </button>
+                <button class="btn-ghost" data-scroll="#contact" data-i18n="hero.findus">
+                  Find us on the map
+                </button>
+              </div>
+
+              <div class="hero-note" data-i18n="hero.note">
+                Qualified for the European Premier Event <strong>2025</strong>,
+                representing Romania on the international stage for the third time.
+              </div>
+            </div>
+
+            <div class="hero-visual-wrap">
+              <div class="hero-visual">
+                <div class="badge-code">FTC · 2025–2026</div>
+                <div class="hero-visual-title" data-i18n="hero.robot">Robot · Hammer</div>
+                <div class="hero-visual-main">
+                  <div class="hero-robot">
+                    <img src="https://soft-hoarders.com/IntoTheDeepRobot.png" alt="Into The Deep Robot">
+                  </div>
+                  <div class="hero-visual-footer">
+                    <div>
+                      <div data-i18n="hero.status">Control Hub Status</div>
+                      <div><strong data-i18n="hero.ready">CONNECTED · MATCH READY</strong></div>
                     </div>
-                  </div>
-                </div>
-                <div class="hero-visual-footer">
-                  <div>
-                    <div data-i18n="hero.status">Control Hub Status</div>
-                    <div><strong data-i18n="hero.ready">CONNECTED · MATCH READY</strong></div>
-                  </div>
-                  <div class="chips">
-                    <div class="chip">Autonomous</div>
-                    <div class="chip">TeleOp</div>
-                    <div class="chip">End Game</div>
+                    <div class="chips">
+                      <div class="chip">Autonomous</div>
+                      <div class="chip">TeleOp</div>
+                      <div class="chip">Endgame</div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- Goals -->
-      <section id="goals" class="fade-in">
-        <div class="section-label" data-i18n="goals.label">Goals</div>
-        <h2 class="section-title" data-i18n="goals.title">What drives our team</h2>
-        <p class="section-lead" data-i18n="goals.lead">
-          From the first brainstorming session to the final match, we focus on
-          growth, innovation, and sharing our passion for STEM with as many
-          people as possible.
-        </p>
+        <!-- Goals -->
+        <section id="goals" class="fade-in">
+          <div class="section-label" data-i18n="goals.label">Goals</div>
+          <h2 class="section-title" data-i18n="goals.title">What drives our team</h2>
+          <p class="section-lead" data-i18n="goals.lead">
+            From the first brainstorming session to the final match, we focus on
+            growth, innovation, and sharing our passion for STEM with as many
+            people as possible.
+          </p>
 
-        <div class="cards-3">
-          <article class="card">
-            <div class="card-label">01</div>
-            <h3 class="card-title" data-i18n="goals.card1.title">Self-Improvement</h3>
-            <p class="card-body" data-i18n="goals.card1.body">
-              We strive for excellence through teamwork, continuous learning,
-              and effective collaboration, both on and off the field.
-            </p>
-          </article>
+          <div class="cards-3">
+            <article class="card">
+              <div class="card-label">01</div>
+              <h3 class="card-title" data-i18n="goals.card1.title">Self-Improvement</h3>
+              <p class="card-body" data-i18n="goals.card1.body">
+                We strive for excellence through teamwork, continuous learning,
+                and effective collaboration, both on and off the field.
+              </p>
+            </article>
 
-          <article class="card">
-            <div class="card-label">02</div>
-            <h3 class="card-title" data-i18n="goals.card2.title">Innovation in STEM</h3>
-            <p class="card-body" data-i18n="goals.card2.body">
-              Guided by curiosity and creativity, we design and build
-              technological solutions that tackle real-world challenges.
-            </p>
-          </article>
+            <article class="card">
+              <div class="card-label">02</div>
+              <h3 class="card-title" data-i18n="goals.card2.title">Innovation in STEM</h3>
+              <p class="card-body" data-i18n="goals.card2.body">
+                Guided by curiosity and creativity, we design and build
+                technological solutions that tackle real-world challenges.
+              </p>
+            </article>
 
-          <article class="card">
-            <div class="card-label">03</div>
-            <h3 class="card-title" data-i18n="goals.card3.title">Promoting STEM</h3>
-            <p class="card-body" data-i18n="goals.card3.body">
-              Through workshops, demos, and events, we help make STEM
-              accessible, engaging, and inspiring for younger students.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <!-- Achievements -->
-      <section id="achievements" class="fade-in">
-        <div class="section-label" data-i18n="achievements.label">Awards & Achievements</div>
-        <h2 class="section-title" data-i18n="achievements.title">Recognition on and off the field</h2>
-        <p class="section-lead" data-i18n="achievements.lead">
-          Our journey through FIRST Tech Challenge has brought us to national
-          podiums, international fields, and unforgettable collaborations.
-        </p>
-
-        <div class="stats">
-          <div class="stat">
-            <div class="stat-kicker" data-i18n="achievements.stat1.kicker">European Premier Event</div>
-            <div class="stat-number" data-i18n="achievements.stat1.number">Qualified · 3rd time</div>
-            <p class="stat-body" data-i18n="achievements.stat1.body">
-              Competing July 1–5, 2025, alongside some of the best FTC teams
-              in Europe.
-            </p>
+            <article class="card">
+              <div class="card-label">03</div>
+              <h3 class="card-title" data-i18n="goals.card3.title">Promoting STEM</h3>
+              <p class="card-body" data-i18n="goals.card3.body">
+                Through workshops, demos, and events, we help make STEM
+                accessible, engaging, and inspiring for younger students.
+              </p>
+            </article>
           </div>
+        </section>
 
-          <div class="stat">
-            <div class="stat-kicker" data-i18n="achievements.stat2.kicker">Awards</div>
-            <div class="stat-number" data-i18n="achievements.stat2.number">Inspire · Connect · More</div>
-            <p class="stat-body" data-i18n="achievements.stat2.body">
-              Multiple Inspire and Connect Awards at regional and national
-              level, plus 8th place at Maryland Tech Invitational 2023.
-            </p>
-          </div>
+        <!-- Achievements -->
+        <section id="achievements" class="fade-in">
+          <div class="section-label" data-i18n="achievements.label">Awards & Achievements</div>
+          <h2 class="section-title" data-i18n="achievements.title">Recognition on and off the field</h2>
+          <p class="section-lead" data-i18n="achievements.lead">
+            Our journey through FIRST Tech Challenge has brought us to national
+            podiums, international fields, and unforgettable collaborations.
+          </p>
 
-          <div class="stat">
-            <div class="stat-kicker" data-i18n="achievements.stat3.kicker">Outreach</div>
-            <div class="stat-number" data-i18n="achievements.stat3.number">57+ events · 24–25</div>
-            <p class="stat-body" data-i18n="achievements.stat3.body">
-              From local workshops to international collaborations, we commit
-              to growing the global FTC community.
-            </p>
-          </div>
-        </div>
-      </section>
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-kicker" data-i18n="achievements.stat1.kicker">European Premier Event</div>
+              <div class="stat-number" data-i18n="achievements.stat1.number">Qualified · 3rd time</div>
+              <p class="stat-body" data-i18n="achievements.stat1.body">
+                Competing July 1–5, 2025, alongside some of the best FTC teams
+                in Europe.
+              </p>
+            </div>
 
-      <!-- Competitions -->
-      <section id="competitions" class="fade-in">
-        <div class="section-label" data-i18n="competitions.label">Recent Competitions</div>
-        <h2 class="section-title" data-i18n="competitions.title">Where we competed recently</h2>
+            <div class="stat">
+              <div class="stat-kicker" data-i18n="achievements.stat2.kicker">Awards</div>
+              <div class="stat-number" data-i18n="achievements.stat2.number">Inspire · Connect · More</div>
+              <p class="stat-body" data-i18n="achievements.stat2.body">
+                Multiple Inspire and Connect Awards at regional and national
+                level, plus 8th place at Maryland Tech Invitational 2023.
+              </p>
+            </div>
 
-        <div class="timeline">
-          <article class="timeline-item">
-            <h3 class="timeline-title" data-i18n="competitions.item1.title">Romanian National Championship</h3>
-            <div class="timeline-meta" data-i18n="competitions.item1.meta">Nationals · Romania</div>
-            <p class="timeline-body" data-i18n="competitions.item1.body">
-              Qualified for the 9th consecutive year since 2016 and received
-              the Connect Award 1 for our impact beyond the field.
-            </p>
-          </article>
-
-          <article class="timeline-item">
-            <h3 class="timeline-title" data-i18n="competitions.item2.title">West Regional Championship</h3>
-            <div class="timeline-meta" data-i18n="competitions.item2.meta">Regionals · West</div>
-            <p class="timeline-body" data-i18n="competitions.item2.body">
-              Finalist Alliance Partner and Inspire Award 2, highlighting both
-              robot performance and team culture.
-            </p>
-          </article>
-
-          <article class="timeline-item">
-            <h3 class="timeline-title" data-i18n="competitions.item3.title">Maryland Tech Invitational</h3>
-            <div class="timeline-meta" data-i18n="competitions.item3.meta">USA · 2023</div>
-            <p class="timeline-body" data-i18n="competitions.item3.body">
-              Ranked 8th among 40 of the world's best FTC teams in one of the
-              most competitive off-season events.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <!-- Sponsors -->
-      <section id="sponsors" class="fade-in">
-        <div class="section-label" data-i18n="sponsors.label">Our Sponsors</div>
-        <h2 class="section-title" data-i18n="sponsors.title">Partners who power our journey</h2>
-        <p class="section-lead" data-i18n="sponsors.lead">
-          We are grateful for the companies and organizations that support our
-          work, from parts and tools to travel and competition fees.
-        </p>
-
-        <div class="sponsors-wrap">
-          <div class="sponsors-contact">
-            <p data-i18n="sponsors.cta">
-              Interested in sponsoring our team? We'd love to hear from you.
-            </p>
-            <button class="btn-ghost" data-scroll="#contact" data-i18n="sponsors.button">
-              Get in Touch
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <!-- Contact -->
-      <section id="contact" class="fade-in">
-        <div class="section-label" data-i18n="contact.label">Contact</div>
-        <h2 class="section-title" data-i18n="contact.title">Find us and follow our work</h2>
-        <p class="section-lead" data-i18n="contact.lead">
-          We are based at "Frații Buzești" National College in Craiova.
-          Reach out if you want to collaborate, invite us to an event, or
-          learn more about FTC.
-        </p>
-        <div class="contact-grid">
-          <div class="contact-card">
-            <h3 data-i18n="contact.location.title">Location</h3>
-            <p data-i18n="contact.location.body">
-              "Frații Buzești" National College<br>
-              Strada Unirii 14-16, Craiova 200410, Romania
-            </p>
-          </div>
-          <div class="contact-card">
-            <h3 data-i18n="contact.social.title">Follow Us</h3>
-            <div class="social-links">
-              <a href="https://www.instagram.com/soft.hoarders/" target="_blank" rel="noreferrer" class="social-link">Instagram</a>
-              <a href="https://www.facebook.com/SoftHoarders" target="_blank" rel="noreferrer" class="social-link">Facebook</a>
-              <a href="https://www.tiktok.com/@softhoarders" target="_blank" rel="noreferrer" class="social-link">TikTok</a>
-              <a href="https://github.com/SoftHoardersOG" target="_blank" rel="noreferrer" class="social-link">GitHub</a>
+            <div class="stat">
+              <div class="stat-kicker" data-i18n="achievements.stat3.kicker">Outreach</div>
+              <div class="stat-number" data-i18n="achievements.stat3.number">57+ events · 24–25</div>
+              <p class="stat-body" data-i18n="achievements.stat3.body">
+                From local workshops to international collaborations, we commit
+                to growing the global FTC community.
+              </p>
             </div>
           </div>
-        </div>
-      </section>
-    </div>
-  </main>
+        </section>
 
-  <footer>
-    <div class="footer-inner">
-      <div>© 2025 Soft Hoarders 12560. <span data-i18n="footer.rights">All rights reserved.</span></div>
-      <div class="footer-links">
-        <a href="https://www.instagram.com/soft.hoarders/" target="_blank" rel="noreferrer">Instagram</a>
-        <a href="https://www.facebook.com/SoftHoarders" target="_blank" rel="noreferrer">Facebook</a>
-        <a href="https://www.tiktok.com/@softhoarders" target="_blank" rel="noreferrer">TikTok</a>
-        <a href="https://github.com/SoftHoardersOG" target="_blank" rel="noreferrer">GitHub</a>
+        <!-- Competitions -->
+        <section id="competitions" class="fade-in">
+          <div class="section-label" data-i18n="competitions.label">Recent Competitions</div>
+          <h2 class="section-title" data-i18n="competitions.title">Where we competed recently</h2>
+
+          <div class="timeline">
+            <article class="timeline-item">
+              <h3 class="timeline-title" data-i18n="competitions.item1.title">Romanian National Championship</h3>
+              <div class="timeline-meta" data-i18n="competitions.item1.meta">Nationals · Romania</div>
+              <p class="timeline-body" data-i18n="competitions.item1.body">
+                Qualified for the 9th consecutive year since 2016 and received
+                the Connect Award 1 for our impact beyond the field.
+              </p>
+            </article>
+
+            <article class="timeline-item">
+              <h3 class="timeline-title" data-i18n="competitions.item2.title">West Regional Championship</h3>
+              <div class="timeline-meta" data-i18n="competitions.item2.meta">Regionals · West</div>
+              <p class="timeline-body" data-i18n="competitions.item2.body">
+                Finalist Alliance Partner and Inspire Award 2, highlighting both
+                robot performance and team culture.
+              </p>
+            </article>
+
+            <article class="timeline-item">
+              <h3 class="timeline-title" data-i18n="competitions.item3.title">Maryland Tech Invitational</h3>
+              <div class="timeline-meta" data-i18n="competitions.item3.meta">USA · 2023</div>
+              <p class="timeline-body" data-i18n="competitions.item3.body">
+                Ranked 8th among 40 of the world's best FTC teams in one of the
+                most competitive off-season events.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <!-- Recent Results from FTC Scout -->
+        <section id="results" class="fade-in">
+          <div class="section-label" data-i18n="results.label">Recent Results</div>
+          <h2 class="section-title" data-i18n="results.title">Live performance data</h2>
+          <p class="section-lead" data-i18n="results.lead">
+            Real-time statistics from our recent FTC events, powered by FTC Scout.
+          </p>
+          <div id="resultsGrid" class="results-grid">
+            <div class="results-loading">
+              <div class="spinner"></div>
+              <p>Loading data from FTC Scout...</p>
+            </div>
+          </div>
+          <script>
+            // Render as soon as resultsGrid is parsed
+            (function () {
+              var grid = document.getElementById('resultsGrid');
+              if (!grid || !window.ftcScoutPromise) return;
+
+              window.ftcScoutPromise.then(function (data) {
+                if (!data.data || !data.data.teamByNumber || !data.data.teamByNumber.events) {
+                  throw new Error('No data');
+                }
+                var events = data.data.teamByNumber.events;
+                // Sort by event start date descending and take last 3
+                events.sort(function (a, b) {
+                  return new Date(b.event.start) - new Date(a.event.start);
+                });
+                events = events.slice(0, 3);
+
+                grid.innerHTML = '';
+                events.forEach(function (ev) {
+                  var e = ev.event;
+                  var s = ev.stats;
+                  var loc = e.location ? (e.location.city || '') + (e.location.country ? ', ' + e.location.country : '') : '';
+                  var dateStr = e.start ? new Date(e.start).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+                  var rank = s ? s.rank : '—';
+                  var wins = s ? s.wins : 0;
+                  var losses = s ? s.losses : 0;
+                  var ties = s ? s.ties : 0;
+                  var opr = s && s.opr ? Math.round(s.opr.totalPointsNp * 10) / 10 : '—';
+                  var qmp = s ? s.qualMatchesPlayed : 0;
+
+                  var card = document.createElement('div');
+                  card.className = 'result-card';
+                  card.innerHTML =
+                    '<div class="result-card-header">' +
+                    '  <div>' +
+                    '    <div class="result-card-title">' + (e.name || ev.eventCode) + '</div>' +
+                    '    <div class="result-card-meta">' + dateStr + (loc ? ' · ' + loc : '') + '</div>' +
+                    '  </div>' +
+                    '  <div class="result-rank">#' + rank + '</div>' +
+                    '</div>' +
+                    '<div class="result-wlt">' +
+                    '  <div class="result-wlt-item result-wlt-w">' + wins + 'W</div>' +
+                    '  <div class="result-wlt-item result-wlt-l">' + losses + 'L</div>' +
+                    '  <div class="result-wlt-item result-wlt-t">' + ties + 'T</div>' +
+                    '</div>' +
+                    '<div class="result-stats">' +
+                    '  <div class="result-stat"><div class="result-stat-value">' + opr + '</div><div class="result-stat-label">OPR</div></div>' +
+                    '  <div class="result-stat"><div class="result-stat-value">' + qmp + '</div><div class="result-stat-label">Matches</div></div>' +
+                    '  <div class="result-stat"><div class="result-stat-value">#' + rank + '</div><div class="result-stat-label">Rank</div></div>' +
+                    '</div>' +
+                    '<a href="https://ftcscout.org/events/2025/' + ev.eventCode + '/matches" target="_blank" rel="noreferrer" class="result-link">View on FTC Scout →</a>';
+                  grid.appendChild(card);
+                });
+              }).catch(function (err) {
+                console.warn('FTC Scout API error:', err);
+                grid.innerHTML =
+                  '<div class="results-loading">' +
+                  '<p>Could not load data from FTC Scout. <a href="https://ftcscout.org/teams/12560" target="_blank" rel="noreferrer" style="color:#22c55e">View on ftcscout.org</a></p>' +
+                  '</div>';
+              });
+            })();
+          </script>
+        </section>
+
+        <!-- Team -->
+        <section id="team" class="fade-in">
+          <div class="section-label" data-i18n="team.label">The Team</div>
+          <h2 class="section-title" data-i18n="team.title">Meet the people behind the robot</h2>
+          <p class="section-lead" data-i18n="team.lead">
+            A diverse group of students from "Frații Buzești" National College, united by a passion for robotics,
+            engineering, and community impact.
+          </p>
+          <h3 class="team-group-title" data-i18n="team.leaders_title">Team Leaders</h3>
+          <div class="team-grid">
+            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">IA</div><div class="team-member-name">Ian</div><div class="team-member-desc" data-i18n="team.ian"></div></div>
+            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">RA</div><div class="team-member-name">Rareș</div><div class="team-member-desc" data-i18n="team.rares_lead"></div></div>
+          </div>
+
+          <h3 class="team-group-title" data-i18n="team.members_title">Members</h3>
+          <div class="team-grid">
+            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">AL</div><div class="team-member-name">Alisia</div><div class="team-member-desc" data-i18n="team.alisia"></div></div>
+            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">EC</div><div class="team-member-name">Ecaterina</div><div class="team-member-desc" data-i18n="team.ecaterina"></div></div>
+            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">VL</div><div class="team-member-name">Vlad</div><div class="team-member-desc" data-i18n="team.vlad1"></div></div>
+            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">TE</div><div class="team-member-name">Teo</div><div class="team-member-desc" data-i18n="team.teo"></div></div>
+            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">AN</div><div class="team-member-name">Annia</div><div class="team-member-desc" data-i18n="team.annia"></div></div>
+            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">RO</div><div class="team-member-name">Robert</div><div class="team-member-desc" data-i18n="team.robert"></div></div>
+            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">RA</div><div class="team-member-name">Rareș</div><div class="team-member-desc" data-i18n="team.rares1"></div></div>
+            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">CA</div><div class="team-member-name">Candidatu Luca</div><div class="team-member-desc" data-i18n="team.candidatu"></div></div>
+            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">VL</div><div class="team-member-name">Vlad</div><div class="team-member-desc" data-i18n="team.vlad2"></div></div>
+            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">AL</div><div class="team-member-name">Alexia</div><div class="team-member-desc" data-i18n="team.alexia"></div></div>
+            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">AG</div><div class="team-member-name">Agatha</div><div class="team-member-desc" data-i18n="team.agatha"></div></div>
+            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">KA</div><div class="team-member-name">Karina</div><div class="team-member-desc" data-i18n="team.karina"></div></div>
+            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">MA</div><div class="team-member-name">Matei</div><div class="team-member-desc" data-i18n="team.matei"></div></div>
+            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">RA</div><div class="team-member-name">Rareș</div><div class="team-member-desc" data-i18n="team.rares2"></div></div>
+            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">TH</div><div class="team-member-name">Theodor</div><div class="team-member-desc" data-i18n="team.theodor"></div></div>
+            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">VL</div><div class="team-member-name">Vladimir</div><div class="team-member-desc" data-i18n="team.vladimir"></div></div>
+          </div>
+
+          <h3 class="team-group-title" data-i18n="team.mentors_title">Mentors</h3>
+          <div class="team-grid">
+            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">AU</div><div class="team-member-name">Aurora Simon</div><div class="team-member-desc" data-i18n="team.aurora"></div></div>
+            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">PO</div><div class="team-member-name">Popoi Silviu</div><div class="team-member-desc" data-i18n="team.popoi"></div></div>
+          </div>
+        </section>
+
+        
+        <!-- Sponsors -->
+        <section id="sponsors" class="fade-in">
+          <div class="section-label" data-i18n="sponsors.label">Our Sponsors</div>
+          <h2 class="section-title" data-i18n="sponsors.title">Partners who power our journey</h2>
+          <p class="section-lead" data-i18n="sponsors.lead">
+            We are grateful for the companies and organizations that support our
+            work, from parts and tools to travel and competition fees.
+          </p>
+
+          <div class="sponsors-wrap">
+            <div class="sponsors-contact">
+              <p data-i18n="sponsors.cta">
+                Interested in sponsoring our team? We'd love to hear from you.
+              </p>
+              <a href="mailto:team@softhoarders.me" class="btn-ghost" data-i18n="sponsors.button">
+                Get in Touch
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="fade-in">
+          <div class="section-label" data-i18n="contact.label">Contact</div>
+          <h2 class="section-title" data-i18n="contact.title">Find us on the map</h2>
+          <p class="section-lead" data-i18n="contact.lead">
+            We are based at "Frații Buzești" National College in Craiova.
+            Reach out if you want to collaborate, invite us to an event, or
+            learn more about FTC.
+          </p>
+          <div class="contact-grid">
+            <div class="contact-card">
+              <div class="location-card-inner">
+                <h3 data-i18n="contact.location.title">Location</h3>
+                <p data-i18n="contact.location.body">
+                  Bulevardul Știrbei Vodă 5<br>
+                  200352 Craiova, Romania
+                </p>
+                <div style="margin-top: 24px;"></div>
+                <h3 data-i18n="contact.email.title">Email Addresses</h3>
+                <p><a href="mailto:team@softhoarders.me" style="color: var(--accent-soft); text-decoration: underline;">team@softhoarders.me</a></p>
+                <p><a href="mailto:team@softhoarders.me" style="color: var(--accent-soft); text-decoration: underline;">s.hoarders@gmail.com</a></p>
+
+              </div>
+            </div>
+            <div class="contact-card" style="padding: 0;">
+                <div id="locationMap" style="height: 100%; min-height: 300px; border-radius: var(--radius-lg); margin: 0; border: none;"></div>
+            </div>
+          </div>
+        </section>
       </div>
-    </div>
-  </footer>
-</div>
+    </main>
 
-<script>
-  // Translations
-  const translations = {
-    en: {
-      'nav.goals': 'Goals',
-      'nav.achievements': 'Achievements',
-      'nav.competitions': 'Competitions',
-      'nav.sponsors': 'Sponsors',
-      'nav.contact': 'Contact',
-      'hero.eyebrow': 'FTC Robotics Team',
-      'hero.location': 'Craiova · Romania',
-      'hero.title1': "It's not about",
-      'hero.title2': 'wires.',
-      'hero.title3': "It's about",
-      'hero.title4': 'connections.',
-      'hero.subtitle': 'We are a FIRST Tech Challenge robotics team from "Frații Buzești" National College, Craiova, building robots and a stronger STEM community.',
-      'hero.team': 'Team',
-      'hero.league': 'League',
-      'hero.since': 'Since',
-      'hero.explore': 'Explore',
-      'hero.findus': 'Find us on the map',
-      'hero.note': 'Qualified for the European Premier Event <strong>2025</strong>, representing Romania on the international stage for the third time.',
-      'hero.robot': 'Robot System · SH-25',
-      'hero.status': 'Control Hub Status',
-      'hero.ready': 'CONNECTED · MATCH READY',
-      'goals.label': 'Goals',
-      'goals.title': 'What drives our team',
-      'goals.lead': 'From the first brainstorming session to the final match, we focus on growth, innovation, and sharing our passion for STEM with as many people as possible.',
-      'goals.card1.title': 'Self-Improvement',
-      'goals.card1.body': 'We strive for excellence through teamwork, continuous learning, and effective collaboration, both on and off the field.',
-      'goals.card2.title': 'Innovation in STEM',
-      'goals.card2.body': 'Guided by curiosity and creativity, we design and build technological solutions that tackle real-world challenges.',
-      'goals.card3.title': 'Promoting STEM',
-      'goals.card3.body': 'Through workshops, demos, and events, we help make STEM accessible, engaging, and inspiring for younger students.',
-      'achievements.label': 'Awards & Achievements',
-      'achievements.title': 'Recognition on and off the field',
-      'achievements.lead': 'Our journey through FIRST Tech Challenge has brought us to national podiums, international fields, and unforgettable collaborations.',
-      'achievements.stat1.kicker': 'European Premier Event',
-      'achievements.stat1.number': 'Qualified · 3rd time',
-      'achievements.stat1.body': 'Competing July 1–5, 2025, alongside some of the best FTC teams in Europe.',
-      'achievements.stat2.kicker': 'Awards',
-      'achievements.stat2.number': 'Inspire · Connect · More',
-      'achievements.stat2.body': 'Multiple Inspire and Connect Awards at regional and national level, plus 8th place at Maryland Tech Invitational 2023.',
-      'achievements.stat3.kicker': 'Outreach',
-      'achievements.stat3.number': '57+ events · 24–25',
-      'achievements.stat3.body': 'From local workshops to international collaborations, we commit to growing the global FTC community.',
-      'competitions.label': 'Recent Competitions',
-      'competitions.title': 'Where we competed recently',
-      'competitions.item1.title': 'Romanian National Championship',
-      'competitions.item1.meta': 'Nationals · Romania',
-      'competitions.item1.body': 'Qualified for the 9th consecutive year since 2016 and received the Connect Award 1 for our impact beyond the field.',
-      'competitions.item2.title': 'West Regional Championship',
-      'competitions.item2.meta': 'Regionals · West',
-      'competitions.item2.body': 'Finalist Alliance Partner and Inspire Award 2, highlighting both robot performance and team culture.',
-      'competitions.item3.title': 'Maryland Tech Invitational',
-      'competitions.item3.meta': 'USA · 2023',
-      'competitions.item3.body': "Ranked 8th among 40 of the world's best FTC teams in one of the most competitive off-season events.",
-      'sponsors.label': 'Our Sponsors',
-      'sponsors.title': 'Partners who power our journey',
-      'sponsors.lead': 'We are grateful for the companies and organizations that support our work, from parts and tools to travel and competition fees.',
-      'sponsors.cta': 'Interested in sponsoring our team? We\'d love to hear from you.',
-      'sponsors.button': 'Get in Touch',
-      'contact.label': 'Contact',
-      'contact.title': 'Find us and follow our work',
-      'contact.lead': 'We are based at "Frații Buzești" National College in Craiova. Reach out if you want to collaborate, invite us to an event, or learn more about FTC.',
-      'contact.location.title': 'Location',
-      'contact.location.body': '"Frații Buzești" National College<br>Strada Unirii 14-16, Craiova 200410, Romania',
-      'contact.social.title': 'Follow Us',
-      'footer.rights': 'All rights reserved.'
-    },
-    ro: {
-      'nav.goals': 'Obiective',
-      'nav.achievements': 'Realizări',
-      'nav.competitions': 'Competiții',
-      'nav.sponsors': 'Sponsori',
-      'nav.contact': 'Contact',
-      'hero.eyebrow': 'Echipa de Robotică FTC',
-      'hero.location': 'Craiova · România',
-      'hero.title1': 'Nu este despre',
-      'hero.title2': 'fire.',
-      'hero.title3': 'Este despre',
-      'hero.title4': 'conexiuni.',
-      'hero.subtitle': 'Suntem o echipă FIRST Tech Challenge de la Colegiul Național "Frații Buzești", Craiova, construind roboți și o comunitate STEM mai puternică.',
-      'hero.team': 'Echipa',
-      'hero.league': 'Liga',
-      'hero.since': 'Din',
-      'hero.explore': 'Descoperă',
-      'hero.findus': 'Găsește-ne pe hartă',
-      'hero.note': 'Calificată pentru Evenimentul Premier European <strong>2025</strong>, reprezentând România pe scena internațională pentru a treia oară.',
-      'hero.robot': 'Sistem Robot · SH-25',
-      'hero.status': 'Status Control Hub',
-      'hero.ready': 'CONECTAT · PREGĂTIT',
-      'goals.label': 'Obiective',
-      'goals.title': 'Ce ne motivează',
-      'goals.lead': 'De la prima sesiune de brainstorming până la meciul final, ne concentrăm pe creștere, inovație și împărtășirea pasiunii pentru STEM cu cât mai mulți oameni.',
-      'goals.card1.title': 'Auto-îmbunătățire',
-      'goals.card1.body': 'Ne străduim pentru excelență prin munca în echipă, învățare continuă și colaborare eficientă, atât pe teren, cât și în afara lui.',
-      'goals.card2.title': 'Inovație în STEM',
-      'goals.card2.body': 'Ghidati de curiozitate și creativitate, proiectăm și construim soluții tehnologice care abordează provocări reale.',
-      'goals.card3.title': 'Promovarea STEM',
-      'goals.card3.body': 'Prin ateliere, demonstrații și evenimente, ajutăm la accesibilizarea STEM, făcându-l atractiv și inspirațional pentru elevi.',
-      'achievements.label': 'Premii și Realizări',
-      'achievements.title': 'Recunoaștere pe și în afara terenului',
-      'achievements.lead': 'Călătoria noastră prin FIRST Tech Challenge ne-a adus pe podiumuri naționale, pe terenuri internaționale și în colaborări de neuitat.',
-      'achievements.stat1.kicker': 'Eveniment Premier European',
-      'achievements.stat1.number': 'Calificată · a 3-a oară',
-      'achievements.stat1.body': 'Competiție 1–5 iulie 2025, alături de unele dintre cele mai bune echipe FTC din Europa.',
-      'achievements.stat2.kicker': 'Premii',
-      'achievements.stat2.number': 'Inspire · Connect · Altele',
-      'achievements.stat2.body': 'Multiple premii Inspire și Connect la nivel regional și național, plus locul 8 la Maryland Tech Invitational 2023.',
-      'achievements.stat3.kicker': 'Implicare',
-      'achievements.stat3.number': '57+ evenimente · 24–25',
-      'achievements.stat3.body': 'De la ateliere locale la colaborări internaționale, ne angajăm să creștem comunitatea FTC globală.',
-      'competitions.label': 'Competiții Recente',
-      'competitions.title': 'Unde am competitat recent',
-      'competitions.item1.title': 'Campionatul Național Românesc',
-      'competitions.item1.meta': 'Naționale · România',
-      'competitions.item1.body': 'Calificată pentru al 9-lea an consecutiv din 2016 și am primit Connect Award 1 pentru impactul nostru dincolo de teren.',
-      'competitions.item2.title': 'Campionatul Regional de Vest',
-      'competitions.item2.meta': 'Regionale · Vest',
-      'competitions.item2.body': 'Partener Alianță Finalistă și Inspire Award 2, evidențiind atât performanța robotului, cât și cultura echipei.',
-      'competitions.item3.title': 'Maryland Tech Invitational',
-      'competitions.item3.meta': 'SUA · 2023',
-      'competitions.item3.body': 'Locul 8 dintre 40 dintre cele mai bune echipe FTC din lume, la unul dintre cele mai competitive evenimente din off-season.',
-      'sponsors.label': 'Sponsorii Noștri',
-      'sponsors.title': 'Parteneri care ne susțin călătoria',
-      'sponsors.lead': 'Suntem recunoscători companiilor și organizațiilor care ne susțin munca, de la piese și unelte la deplasări și taxe de competiție.',
-      'sponsors.cta': 'Interesat să ne sponsorizezi? Ne-ar face plăcere să auzim de tine.',
-      'sponsors.button': 'Ia Legătura',
-      'contact.label': 'Contact',
-      'contact.title': 'Găsește-ne și urmărește-ne activitatea',
-      'contact.lead': 'Suntem bazati la Colegiul Național "Frații Buzești" din Craiova. Contactează-ne dacă vrei să colaborăm, să ne inviți la un eveniment sau să afli mai multe despre FTC.',
-      'contact.location.title': 'Locație',
-      'contact.location.body': 'Colegiul Național "Frații Buzești"<br>Strada Unirii 14-16, Craiova 200410, România',
-      'contact.social.title': 'Urmărește-ne',
-      'footer.rights': 'Toate drepturile rezervate.'
-    }
-  };
+    <footer>
+      <div class="footer-inner">
+        <div>© <span id="footerYear"></span> Soft Hoarders #12560. <span data-i18n="footer.rights">All rights
+            reserved.</span> · Made with <span style="color: #22c55e;">❤</span> in the heart of Craiova</div>
+        <div class="footer-links">
+          <a href="https://www.instagram.com/soft.hoarders/" target="_blank" rel="noreferrer">Instagram</a>
+          <a href="https://www.facebook.com/SoftHoarders" target="_blank" rel="noreferrer">Facebook</a>
+          <a href="https://www.tiktok.com/@softhoarders" target="_blank" rel="noreferrer">TikTok</a>
+          <a href="https://github.com/softhoarders" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://github.com/SoftHoardersOG" target="_blank" rel="noreferrer">GitHub OG</a>
+        </div>
+      </div>
+    </footer>
+  </div>
 
-  // Language switching
-  let currentLang = 'en';
-
-  function setLanguage(lang) {
-    currentLang = lang;
-    document.documentElement.lang = lang;
-
-    // Update button states
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.lang === lang);
-    });
-
-    // Update all translatable elements
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.dataset.i18n;
-      const translation = translations[lang][key];
-      if (translation) {
-        el.innerHTML = translation;
+  <script>
+    // Translations
+    const translations = {
+      en: {
+        'team.ian': "I'm Ian, the non-technical team leader, I am 17 years old and I've been a member of the team for two years, participating in this year's recruitment session and successfully passing the trial period. I am in the marketing department and I believe I still have much to learn and take from my colleagues in this department. So far, robotics has helped me develop my dexterity and create long-lasting friendships with team members. I consider that I made the right choice to get involved in this field, given the fact that I can learn many things.",
+        'team.rares_lead': "Hi! My name is Rareș and I'm 18 years old. I've been a team member for three years and I hold the role of technical leader. Ever since middle school, my passion for engineering and mathematics has motivated me to continuously learn and always push my limits. I am fully dedicated to this field and I enjoy exploring new technical solutions, experimenting, and perfecting every mechanism I work on. I want to constantly evolve and embrace the challenges that come, always being excited about the opportunities the future holds. I can't wait to discover what new obstacles I'll have to overcome and how I'll be able to use my knowledge to find innovative solutions!",
+        'team.alisia': "Hey! My name is Alisia, I'm part of the marketing department and this is my second year of activity on the team. I never would have thought that robotics would become one of my passions, but after the first workshop I attended, I realized how many opportunities the STEM field could offer me. I consider myself a creative and perfectionist person, and throughout the recruitment period I developed the ability to cooperate with a group of people from whom I still have much to learn, coming to truly love the atmosphere of the FTC competition.",
+        'team.ecaterina': "Hi! My name is Ecaterina and I work in the marketing department, I'm 16 years old and I'm in my first season within the competition. Being passionate about art, creativity has always been my way of expressing myself, whether through drawing, design or other artistic forms. I believe that combining art with technology can lead to innovative results, and within the robotics team I want to learn as much as possible and develop professionally as well as personally. I also consider myself an ambitious and curious person, ready for new experiences and to meet people from everywhere.",
+        'team.vlad1': "My name is Vlad and I've been passionate about photo and video editing ever since I was little. I joined the team 2 years ago, thanks to my involvement in the NasaSpaceApps contest. I consider that First Tech Challenge is a very big opportunity for me to develop my skills and to meet new people who share the same passion as me. Within this collective, I learned what teamwork means, which is fundamental in such a competition. Fun fact: besides robotics, I'm also passionate about video games, especially the ones with a captivating story.",
+        'team.teo': "Hey! My name is Teo and I work in the marketing department. I'm 15 years old and this is my first season on the team. Although it hasn't been long since I joined them, thanks to them I've learned a lot of new things and managed to develop my communication skills. At the same time, I discovered a passion for editing and design, which motivated me to join this department.",
+        'team.annia': "Hey guys! I'm Annia, I'm 16 years old and I joined the team last year, working in the assembly department. I'm an energetic person and I love teamwork, especially in the Soft Hoarders team. With the help of robotics, I've made new friends and acquired extremely useful knowledge. When I enter the lab, I feel like I've arrived at my second home, and this feeling is unique.",
+        'team.robert': "My name is Popescu Robert-Gabriel, I'm 17 years old and this is my third season as part of the Soft Hoarders team, specifically in the marketing department. I could say that two of the traits that characterize me are creativity and devotion, and robotics is the gateway through which I feel I can express them. What I liked most about the team is the welcoming environment created by my teammates, as well as the hard work they put in for their passions. For me, growing alongside people with passions means being able to achieve your greatest goals.",
+        'team.rares1': "Hey, I'm Rareș. I'm 18 years old and I've been a member of this team for 2 years. I'm the leader of the assembly department and I look forward to learning more in this field. I've been fascinated by this field since middle school, and the fact that I now have the opportunity to create something physical that follows my every instruction delights me. I can't wait to participate in a competition since I've heard many great things about the atmosphere there.",
+        'team.candidatu': "Hi! My name is Candidatu Luca and I'm 17 years old. I'm part of the programming department and this is my second year on this team. I've always been passionate about programming, and robotics is a way through which I managed to learn many more aspects of it. Moreover, robotics helped me gain a certain skill in assembly and in teamwork. At first, I wasn't very sure if I really wanted to join this team, but over time, I learned that it means much more than just a simple competition.",
+        'team.vlad2': "Hi! My name is Vlad and I'm the leader of the programming department. I've been passionate about programming since middle school but I didn't have the chance to apply my knowledge in practice. All of that changed when I joined the robotics club, where I was able to deepen my knowledge. In these three years, I've built new friendships and integrated into a new extraordinary community.",
+        'team.alexia': "My name is Alexia and I'm part of the 3D Printing department. This is my 4th season on the team. My passion for 3D design made me join this department, helped of course by creativity and insight. The time spent on this team has helped me develop personally and taught me what it means to be part of a collective, how everyone has a perspective, and all opinions must be respected even if they are contradictory. I consider that FTC is more than a school competition and I'm grateful that it opened the path to the world of robotics for me.",
+        'team.agatha': "Hey! My name is Agatha and I'm part of the 3D design department. This is my first year as a team member and, although I don't have much experience, in a short time I accumulated more knowledge than I thought possible, learning alongside this wonderful team. Being passionate since a young age about technology and different activities, I managed to combine high-performance sports with the world of robotics, developing myself as a person.",
+        'team.karina': "Hey! My name is Karina and I'm 15 years old. I'm part of the programming department, and this is my first season. Since I was little, technology fascinated me, which made me become very interested in everything that robotics means. I'm a conscientious and involved person, always eager to learn as much as possible and become the best version of myself. The experience gained so far in the robotics team has helped me discover my passion and clarify my direction for the future. Here I feel like I'm in a second family, spending a lot of time alongside people with whom I've formed close friendships.",
+        'team.matei': "Hi, I'm Matei, I'm 15 years old. Ever since the recruitment period, I wanted to be in the assembly department, as I love to learn and apply my ideas. The most interesting thing about my department I consider to be improving the mechanisms and thinking about how to make them as efficient as possible. It's a truly special feeling when you see your ideas put into practice and coming to life with the help of the programming department. I also appreciate the close connection with the 3D Design department, who help us improve the robot with custom parts. Going forward, I wish to contribute with as many personal ideas as possible to improve the robot.",
+        'team.rares2': "My name is Rareș, I'm 15 years old and I recently became a member of the Soft Hoarders robotics team. It wasn't easy, but the passion proved to bear fruit in my formation as a teenager, having the opportunity to work alongside a united collective. I found myself in the 3D design department, where I learned to push my limits to create innovative parts and managed to transpose the real world into a program. Thus, I integrated and managed to make close friendships, and now I can no longer call it just a team, but a family.",
+        'team.theodor': "Hi, I'm Theodor, I'm 16 years old and I'm a member of the Assembly department. This is my first season on the team, but I quickly accumulated the necessary knowledge to keep up with my colleagues. From the beginning, I was attracted to the engineering side of the robot. In my opinion, the ability to work in a team helps me collaborate harmoniously with others. In my free time, I like to spend time with friends and play video games.",
+        'team.vladimir': "Hi! My name is Vladimir and I'm 15 years old. I just joined the programming department of the robotics team and I'm extremely excited to be part of this experience! I've always been fascinated by technology, and programming seems like a superpower that allows you to turn ideas into reality. Since joining the team, I've discovered a new world full of challenges and learning opportunities. I enjoy understanding how algorithms work, testing code, and seeing how line by line, the program I write contributes to the robot's movements and decisions on the field. And during this month, I am determined to learn as much as possible. With the team, getting better and better!",
+        'team.aurora': "Ever since I met the robotics team, seeing them as children, as young people who sacrifice their time for their dreams, I chose to stay by their side. Starting last season, I gained the status of mentor for the SoftHoarders robotics team and I supported them every moment, ensuring a close connection with the college where they study. Even though the subject I teach is part of the smaller but essential percentage of knowledge needed in this competition, the passion I saw in their work has maintained my love for this team and these young people.",
+        'team.popoi': "From the perspective of a physics teacher, I can confess that I was surprised by the knowledge of my students who are part of the high school robotics team. I was pleasantly impressed by their capabilities and desire to learn within a field that the school fails to cover entirely. I am glad I have the opportunity to support such talented young people and I am convinced that I will witness the first steps of the future revolutionary generation of engineers, programmers and experts.",
+        'nav.goals': 'Goals',
+        'nav.achievements': 'Achievements',
+        'nav.competitions': 'Competitions',
+        'nav.sponsors': 'Sponsors',
+        'nav.contact': 'Contact',
+        'hero.eyebrow': 'FTC Robotics Team',
+        'hero.location': 'Craiova · Romania',
+        'hero.title1': "It's not about",
+        'hero.title2': 'wires.',
+        'hero.title3': "It's about",
+        'hero.title4': 'connections.',
+        'hero.subtitle': 'We are the FIRST Tech Challenge robotics team from "Frații Buzești" National College, Craiova, building robots and a stronger STEM community.',
+        'hero.team': 'Team',
+        'hero.league': 'League',
+        'hero.since': 'Since',
+        'hero.explore': 'Explore',
+        'hero.findus': 'Find us on the map',
+        'hero.note': 'Qualified for the European Premier Event <strong>2025</strong>, representing Romania on the international stage for the third time.',
+        'hero.robot': 'Robot · Hammer',
+        'hero.status': 'Control Hub Status',
+        'hero.ready': 'CONNECTED · MATCH READY',
+        'goals.label': 'Goals',
+        'goals.title': 'What drives our team',
+        'goals.lead': 'From the first brainstorming session to the final match, we focus on growth, innovation, and sharing our passion for STEM with as many people as possible.',
+        'goals.card1.title': 'Self-Improvement',
+        'goals.card1.body': 'We strive for excellence through teamwork, continuous learning, and effective collaboration, both on and off the field.',
+        'goals.card2.title': 'Innovation in STEM',
+        'goals.card2.body': 'Guided by curiosity and creativity, we design and build technological solutions that tackle real-world challenges.',
+        'goals.card3.title': 'Promoting STEM',
+        'goals.card3.body': 'Through workshops, demos, and events, we help make STEM accessible, engaging, and inspiring for younger students.',
+        'achievements.label': 'Awards & Achievements',
+        'achievements.title': 'Recognition on and off the field',
+        'achievements.lead': 'Our journey through FIRST Tech Challenge has brought us to national podiums, international fields, and unforgettable collaborations.',
+        'achievements.stat1.kicker': 'European Premier Event',
+        'achievements.stat1.number': 'Qualified · 3rd time',
+        'achievements.stat1.body': 'Competing July 1–5, 2025, alongside some of the best FTC teams in Europe.',
+        'achievements.stat2.kicker': 'Awards',
+        'achievements.stat2.number': 'Inspire · Connect · More',
+        'achievements.stat2.body': 'Multiple Inspire and Connect Awards at regional and national level, plus 8th place at Maryland Tech Invitational 2023.',
+        'achievements.stat3.kicker': 'Outreach',
+        'achievements.stat3.number': '57+ events · 24–25',
+        'achievements.stat3.body': 'From local workshops to international collaborations, we commit to growing the global FTC community.',
+        'competitions.label': 'Recent Competitions',
+        'competitions.title': 'Where we competed recently',
+        'competitions.item1.title': 'Romanian National Championship',
+        'competitions.item1.meta': 'Nationals · Romania',
+        'competitions.item1.body': 'Qualified for the 9th consecutive year since 2016 and received the Connect Award 1 for our impact beyond the field.',
+        'competitions.item2.title': 'West Regional Championship',
+        'competitions.item2.meta': 'Regionals · West',
+        'competitions.item2.body': 'Finalist Alliance Partner and Inspire Award 2, highlighting both robot performance and team culture.',
+        'competitions.item3.title': 'Maryland Tech Invitational',
+        'competitions.item3.meta': 'USA · 2023',
+        'competitions.item3.body': "Ranked 8th among 40 of the world's best FTC teams in one of the most competitive off-season events.",
+        'sponsors.label': 'Our Sponsors',
+        'sponsors.title': 'Partners who power our journey',
+        'sponsors.lead': 'We are grateful for the companies and organizations that support our work, from parts and tools to travel and competition fees.',
+        'sponsors.cta': 'Interested in sponsoring our team? We\'d love to hear from you.',
+        'sponsors.button': 'Get in Touch',
+        'contact.label': 'Contact',
+        'contact.title': 'Find us on the map',
+        'contact.lead': 'We are based at "Frații Buzești" National College in Craiova. Reach out if you want to collaborate, invite us to an event, or learn more about FTC.',
+        'contact.location.title': 'Location',
+        'contact.location.body': 'Bulevardul Știrbei Vodă 5<br>200352 Craiova, Romania',
+        'contact.email.title': 'Email',
+        'footer.rights': 'All rights reserved.',
+        'nav.results': 'Results',
+        'results.label': 'Recent Results',
+        'results.title': 'Live performance data',
+        'results.lead': 'Real-time statistics from our recent FTC events, powered by FTC Scout.',
+        'team.label': 'The Team',
+        'team.title': 'Meet the people behind the robot',
+        'team.lead': 'A diverse group of students from "Frații Buzești" National College, united by a passion for robotics, engineering, and community impact.',
+        'team.role.captain': 'Team Captain',
+        'team.role.software': 'Software Lead',
+        'team.role.hardware': 'Hardware Lead',
+        'team.role.design': 'CAD / Design',
+        'team.role.outreach': 'Outreach Lead',
+        'team.role.driver': 'Driver',
+        'team.role.notebook': 'Engineering Notebook',
+        'team.role.mentor': 'Mentor',
+        'nav.team': 'Team',
+        'team.leaders_title': 'Team Leaders',
+        'team.members_title': 'Members',
+        'team.mentors_title': 'Mentors'
+      },
+      ro: {
+        'team.ian': "Sunt Ian, liderul non-tehnic al echipei, am 17 ani și sunt membru de doi ani în echipă, participând la sesiunea de recrutări de anul acesta și trecând de perioada de aspirantă cu brio. Sunt în departamentul de marketing și consider că mai am multe de învățat și de preluat de la colegii mei din acest departament. Până acum, robotica m-a ajutat să-mi dezvolt dexteritatea și să-mi creez prietenii longevive cu membrii echipei. Consider că am făcut alegerea potrivită să mă implic în acest domeniu, dat fiind faptul că pot învăța multe lucruri.",
+        'team.rares_lead': "Salut! Mă numesc Rareș și am 18 ani. Sunt membru al echipei de trei ani și ocup rolul de lider tehnic. Încă din gimnaziu, pasiunea mea pentru inginerie și matematică m-a motivat să învăț continuu și să îmi depășesc mereu limitele. Sunt dedicat în totalitate acestui domeniu și îmi place să explorez noi soluții tehnice, să experimentez și să perfecționez fiecare mecanism la care lucrez. Îmi doresc să evoluez constant și să accept provocările care apar, fiind mereu entuziasmat de oportunitățile pe care viitorul le rezervă. Sunt nerăbdător să descopăr ce noi obstacole voi avea de depășit și cum îmi voi putea folosi cunoștințele pentru a găsi soluții inovatoare!",
+        'team.alisia': "Hey! Numele meu este Alisia, fac parte din departamentul de marketing și este al doilea an de activitate în echipă. Niciodată nu m-aș fi gândit că robotica va deveni una dintre pasiunile mele, dar în urma primului workshop la care am luat parte am realizat câte oportunități îmi poate oferi domeniul STEM. Mă consider o fire creativă și perfecționistă, iar pe tot parcursul perioadei de recrutare mi-am dezvoltat abilitatea de a coopera cu un grup de persoane, de la care încă am multe de învățat, ajungând să îndrăgesc foarte mult atmosfera din cadrul competiției FTC.",
+        'team.ecaterina': "Salut! Ma numesc Ecaterina și activez pe departamentul de marketing, am 16 ani și sunt în primul meu sezon în cadrul competiției. Fiind pasionată de artă, întotdeauna creativitatea a fost modul meu de a mă exprima, fie prin desen, design sau alte forme artistice. Cred ca îmbinarea artei cu tehnologia poate duce la rezultate inovatoare, iar în cadrul echipei de robotică vreau sa învăț cat mai multe și sa ma dezvolt pe plan profesional, dar și personal. De asemenea ma consider o fire ambițioasă, curioasă și pregătită de a avea parte de noi experiențe și de a cunoaște oameni de peste tot.",
+        'team.vlad1': "Numele meu este Vlad și sunt pasionat de editarea foto și video încă de când eram mic. Am intrat în echipă în urmă cu 2 ani, datorită implicării mele în cadrul concursului NasaSpaceApps. Consider că First Tech Challenge este o oportunitate foarte mare pentru mine de a-mi dezvolta aptitudinile și pentru a cunoaște persoane noi, ce împărtășesc aceeași pasiune cu mine. În cadrul acestui colectiv am învățat ce înseamnă lucrul în echipă, fapt ce este temeinic într-o astfel de competiție. Fun fact: pe lângă robotică, sunt de asemenea pasionat de jocuri video, îndrăgindu-le în special pe cele cu poveste captivantă.",
+        'team.teo': "Hei! Mă numesc Teo și activez pe departamentul de marketing. Am 15 ani iar acesta este primul meu sezon în echipă. Deși nu a trecut mult timp de când sunt alături de aceștia, datorită lor am învățat o mulțime de lucruri noi și am reușit să îmi dezvolt abilitățile de comunicare. Totodată, mi-am descoperit o pasiune pentru editare și design, ceea ce m-a determinat să mă alătur acestui departament.",
+        'team.annia': "Hey guys! Sunt Annia, am 16 ani și am intrat în echipa anul trecut, activând pe departamentul de asamblare. Sunt o fire energică și iubesc munca în echipă, mai ales în echipa Soft Hoarders. Cu ajutorul roboticii mi-am făcut prieteni noi și am dobândit cunoștințe extrem de folositoare. Când intru în laborator simt că am ajuns la a 2-a mea casă, iar acest sentiment este unic.",
+        'team.robert': "Mă numesc Popescu Robert-Gabriel, am 17 ani și acesta este al treilea sezon în care fac parte din echipa Soft Hoarders, mai exact pe departamentul de marketing. Aș putea spune că, două dintre trăsăturile care mă caracterizează sunt creativitatea și devotamentul, iar robotica este pasajul prin care simt că mi le pot exprima. Ce mi-a plăcut cel mai mult la echipa este mediul primitor creat de coechipierii mei, cât și munca depusă de aceștia pentru pasiunile lor. Pentru mine, a crește alături de oameni care au pasiuni, înseamnă, să poți să-ți atingi cele mai mărețe obiective.",
+        'team.rares1': "Hey, sunt Rareș. Am 18 ani și sunt membru de 2 ani al acestei echipei. Sunt liderul departamentului de asamblare și aștept cu entuziasm să învăț mai multe în acest domeniu. Am fost fascinat de acest domeniu încă din clasele gimnaziale și faptul că acum am posibilitatea de a realiza ceva fizic care să îmi asculte fiecare instrucțiune mă încântă. Sunt nerăbdător să particip la o competiție întrucât am auzit foarte multe lucruri bune despre atmosfera de acolo.",
+        'team.candidatu': "Salut! Numele meu este Candidatul Luca și am 17 ani. Fac parte din departamentul de programare și acesta este al doilea an în această echipă. Din totdeauna am fost pasionat de programare, iar robotica este o modalitate prin care am reușit să învăț mult mai multe aspecte ale acesteia. Mai mult, robotica m-a ajutat să capăt o anumită îndemânare pe partea de asamblare și pe partea de lucru în echipă. La început, nu eram foarte sigur dacă chiar îmi doresc să intru în această echipă, dar, cu timpul, am aflat că înseamnă mult mai mult decât o simplă competiție.",
+        'team.vlad2': "Salut! Numele meu este Vlad și sunt liderul departamentului de programare. Am fost pasionat de programare încă din gimnaziu dar nu am avut ocazia să îmi aplic practic cunoștințele. Toate acestea s-au schimbat când am intrat în clubul de robotică, unde am putut să îmi aprofundez cunoștințele. În acești trei ani am clădit noi prietenii și am să integrez într-o nouă comunitate extraordinară.",
+        'team.alexia': "Numele meu este Alexia și fac parte din departamentul de 3D Printing. Acesta este al 4-lea sezon în cadrul echipei. Pasiunea pentru proiectare 3D m-a făcut să mă alătur acestui departament ajutată desigur de creativitate și perspicacitate. Timpul petrecut în această echipă m-a ajutat să mă dezvolt pe plan personal și m-a învățat ce înseamnă să faci parte dintr-un colectiv, cum toate persoanele au o perspectivă, iar toate părerile trebuie respectate chiar dacă sunt în contradicitoriu. Consider că FTC este mai mult decât o competiție școlară și sunt recunoscătoare că mi-a deschis drumul către lumea roboticii.",
+        'team.agatha': "Hei! Mă numesc Agatha și fac parte din departamentul de design 3D. Acesta este primul meu an ca membru al echipei și, deși nu am multă experiență, în scurt timp am acumulat mai multe cunoștințe decât credeam posibil, învățând alături de este minunat în echipă. Fiind pasionată de mică de tehnologie și diferite activități, am reușit să îmbin sportul de performanță cu lumea roboticii, dezvoltându-mă ca persoană.",
+        'team.karina': "Hei! Numele meu este Karina și am 15 ani. Fac parte din departamentul de programare, iar acesta este primul meu sezon. Încă de mică, tehnologia m-a fascinat, ceea ce m-a făcut să devin foarte interesată de tot ceea ce înseamnă robotică. Sunt o persoană conștiincioasă și implicată, mereu dornică să învăț cât mai multe și să devin cea mai bună versiune a mea. Experiența dobândită până acum în echipa de robotică m-a ajutat să îmi descopăr pasiunea și să îmi clarific direcția pentru viitor. Aici mă simt ca într-o a doua familie, petrecând mult timp alături de oameni cu care am legat prietenii strânse.",
+        'team.matei': "Bună, sunt Matei, am 15 ani. Încă din perioada de recrutare doream să fiu în departamentul de asamblare, eu iubind să învăț și să aplic ideile mele. Cel mai interesant lucru la departamentul meu consider că este să îmbunătățești mecanismele și să te gândești astfel încât să fie cât mai eficiente. E un sentiment cu adevărat special când vezi ideile tale puse în practică și că iau viață cu ajutorul departamentului de programare. Apreciez și strânsa conexiune cu departamentul de Design 3D, aceștia ajutând să îmbunătățim robotul cu ajutorul pieselor custom. În continuare, doresc să contribui cu cât mai multe idei personale pentru îmbunătățirea robotului.",
+        'team.rares2': "Numele meu este Rareș, am 15 ani și recent am devenit membru în echipa de robotică Soft Hoarders. Nu a fost ușor, insa pasiunea s-a dovedit a da roade în formarea mea ca adolescent, ca am oportunitatea de a munci alături de un colectiv unit. Eu m-am regăsit în departamentul de proiectare 3D, unde am învățat să îmi depășesc limitele pentru a crea piese inovatoare și am reușit sa transpun lumea reala într-un program. Astfel, m-am integrat și am reușit sa-mi fac prietenii strânse, iar acum nu o mai pot numi doar o echipă, ci o familie.",
+        'team.theodor': "Salut, sunt Theodor, am 16 ani și sunt membru pe departamentul de Asamblare. Acesta este primul meu sezon în cadrul echipei, dar am acumulat rapid cunoștințele necesare pentru a ține pasul cu colegii mei. Încă de la început am fost atras de partea de inginerie a robotului. În opinia mea, abilitatea de a lucra în echipă ma ajută sa colaborez în armonie cu ceilalți. În timpul liber îmi place sa petrec timp cu prietenii și sa joc jocuri video.",
+        'team.vladimir': "Salut! Mă numesc Vladimir și am 15 ani. Tocmai ce m-am alăturat departamentului de programare al echipei de robotică și sunt extrem de entuziasmat să fac parte din această experiență! Întotdeauna am fost fascinat de tehnologie, iar programarea mi se pare o super putere care îți permite să transformi ideile în realitate. De când am intrat în echipă, am descoperit o lume nouă, plină de provocări și oportunități de învățare. Îmi place să înțeleg cum funcționează algoritmii, să testez codul și să văd cum se mișcă linie după linie programul scris de mine contribuie la mișcările și deciziile robotului pe teren. Și cum în această lună, sunt determinat să învăț cât mai mult posibil. Cu echipa, din ce în ce mai bun!",
+        'team.aurora': "Încă de când am cunoscut echipa de robotică, pe ei ca copii, ca tineri, care își sacrifică timpul pentru visele lor, am ales să rămân alături. Începând cu sezonul trecut, am căpătat statutul de mentor al echipei de robotică SoftHoarders și i-am sprijinit în fiecare moment, asigurându-le o conexiune strânsă cu colegiul unde studiază. Chiar dacă materia pe care o predau face parte din procentul mai mic, dar esențial, al cunoștințelor necesare în această competiție, pasiunea pe care am văzut-o în activitatea lor mi-a menținut dragostea față de această echipă și tineri.",
+        'team.popoi': "Din perspectiva unui profesor de fizică, pot mărturisi că m-au surprins cunoștințele elevilor mei care fac parte din echipa de robotică a liceului. Am rămas plăcut impresionat de capabilitățile lor și dorința de a învăța în cadrul unui domeniu pe care școala nu reușește să îl acopere în totalitate. Mă bucur că am prilejul de a sprijini astfel de tineri talentați și sunt convins că voi asista la primii pași ai viitoarei generații revoluționare de ingineri, programatori și experți.",
+        'nav.goals': 'Obiective',
+        'nav.achievements': 'Realizări',
+        'nav.competitions': 'Competiții',
+        'nav.sponsors': 'Sponsori',
+        'nav.contact': 'Contact',
+        'hero.eyebrow': 'Echipa de Robotică FTC',
+        'hero.location': 'Craiova · România',
+        'hero.title1': "It's not about",
+        'hero.title2': 'wires.',
+        'hero.title3': "It's about",
+        'hero.title4': 'connections.',
+        'hero.subtitle': 'Suntem echipa FIRST Tech Challenge de la Colegiul Național "Frații Buzești", Craiova, construind roboți și o comunitate STEM mai puternică.',
+        'hero.team': 'Echipa',
+        'hero.league': 'Liga',
+        'hero.since': 'Din',
+        'hero.explore': 'Descoperă',
+        'hero.findus': 'Găsește-ne pe hartă',
+        'hero.note': 'Calificată pentru Evenimentul Premier European <strong>2025</strong>, reprezentând România pe scena internațională pentru a treia oară.',
+        'hero.robot': 'Robot · Hammer',
+        'hero.status': 'Status Control Hub',
+        'hero.ready': 'CONECTAT · PREGĂTIT',
+        'goals.label': 'Obiective',
+        'goals.title': 'Ce ne motivează',
+        'goals.lead': 'De la prima sesiune de brainstorming până la meciul final, ne concentrăm pe creștere, inovație și împărtășirea pasiunii pentru STEM cu cât mai mulți oameni.',
+        'goals.card1.title': 'Auto-îmbunătățire',
+        'goals.card1.body': 'Ne străduim pentru excelență prin munca în echipă, învățare continuă și colaborare eficientă, atât pe teren, cât și în afara lui.',
+        'goals.card2.title': 'Inovație în STEM',
+        'goals.card2.body': 'Ghidati de curiozitate și creativitate, proiectăm și construim soluții tehnologice care abordează provocări reale.',
+        'goals.card3.title': 'Promovarea STEM',
+        'goals.card3.body': 'Prin ateliere, demonstrații și evenimente, ajutăm la accesibilizarea STEM, făcându-l atractiv și inspirațional pentru elevi.',
+        'achievements.label': 'Premii și Realizări',
+        'achievements.title': 'Recunoaștere pe și în afara terenului',
+        'achievements.lead': 'Călătoria noastră prin FIRST Tech Challenge ne-a adus pe podiumuri naționale, pe terenuri internaționale și în colaborări de neuitat.',
+        'achievements.stat1.kicker': 'Eveniment Premier European',
+        'achievements.stat1.number': 'Calificată · a 3-a oară',
+        'achievements.stat1.body': 'Competiție 1–5 iulie 2025, alături de unele dintre cele mai bune echipe FTC din Europa.',
+        'achievements.stat2.kicker': 'Premii',
+        'achievements.stat2.number': 'Inspire · Connect · Altele',
+        'achievements.stat2.body': 'Multiple premii Inspire și Connect la nivel regional și național, plus locul 8 la Maryland Tech Invitational 2023.',
+        'achievements.stat3.kicker': 'Implicare',
+        'achievements.stat3.number': '57+ evenimente · 24–25',
+        'achievements.stat3.body': 'De la ateliere locale la colaborări internaționale, ne angajăm să creștem comunitatea FTC globală.',
+        'competitions.label': 'Competiții Recente',
+        'competitions.title': 'Unde am competitat recent',
+        'competitions.item1.title': 'Campionatul Național Românesc',
+        'competitions.item1.meta': 'Naționale · România',
+        'competitions.item1.body': 'Calificată pentru al 9-lea an consecutiv din 2016 și am primit Connect Award 1 pentru impactul nostru dincolo de teren.',
+        'competitions.item2.title': 'Campionatul Regional de Vest',
+        'competitions.item2.meta': 'Regionale · Vest',
+        'competitions.item2.body': 'Partener Alianță Finalistă și Inspire Award 2, evidențiind atât performanța robotului, cât și cultura echipei.',
+        'competitions.item3.title': 'Maryland Tech Invitational',
+        'competitions.item3.meta': 'SUA · 2023',
+        'competitions.item3.body': 'Locul 8 dintre 40 dintre cele mai bune echipe FTC din lume, la unul dintre cele mai competitive evenimente din off-season.',
+        'sponsors.label': 'Sponsorii Noștri',
+        'sponsors.title': 'Parteneri care ne susțin călătoria',
+        'sponsors.lead': 'Suntem recunoscători companiilor și organizațiilor care ne susțin munca, de la piese și unelte la deplasări și taxe de competiție.',
+        'sponsors.cta': 'Interesat să ne sponsorizezi? Ne-ar face plăcere să auzim de tine.',
+        'sponsors.button': 'Ia Legătura',
+        'contact.label': 'Contact',
+        'contact.title': 'Găsește-ne pe hartă',
+        'contact.lead': 'Suntem bazați la Colegiul Național "Frații Buzești" din Craiova. Contactează-ne dacă vrei să colaborăm, să ne inviți la un eveniment sau să afli mai multe despre FTC.',
+        'contact.location.title': 'Locație',
+        'contact.location.body': 'Bulevardul Știrbei Vodă 5<br>200352 Craiova, România',
+        'contact.email.title': 'Email',
+        'footer.rights': 'Toate drepturile rezervate.',
+        'nav.results': 'Rezultate',
+        'results.label': 'Rezultate Recente',
+        'results.title': 'Date de performanță în timp real',
+        'results.lead': 'Statistici în timp real de la evenimentele noastre FTC recente, furnizate de FTC Scout.',
+        'team.label': 'Echipa',
+        'team.title': 'Întâlnește oamenii din spatele robotului',
+        'team.lead': 'Un grup divers de elevi de la Colegiul Național "Frații Buzești", uniți de pasiunea pentru robotică, inginerie și impactul în comunitate.',
+        'team.role.captain': 'Căpitan Echipă',
+        'team.role.software': 'Lider Software',
+        'team.role.hardware': 'Lider Hardware',
+        'team.role.design': 'CAD / Design',
+        'team.role.outreach': 'Lider Outreach',
+        'team.role.driver': 'Șofer Robot',
+        'team.role.notebook': 'Caiet de Inginerie',
+        'team.role.mentor': 'Mentor',
+        'nav.team': 'Echipa',
+        'team.leaders_title': 'Lideri de Echipă',
+        'team.members_title': 'Membri',
+        'team.mentors_title': 'Mentori'
       }
-    });
-  }
+    };
 
-  // Language toggle buttons
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      setLanguage(btn.dataset.lang);
-    });
-  });
+    // Language switching
+    let currentLang = 'en';
 
-  // Smooth scroll for nav buttons/links
-  document.querySelectorAll("[data-scroll], header a[href^='#']").forEach(function(el) {
-    el.addEventListener("click", function (e) {
-      e.preventDefault();
-      var target = this.getAttribute("data-scroll") || this.getAttribute("href");
-      var node = document.querySelector(target);
-      if (!node) return;
-      window.scrollTo({
-        top: node.offsetTop - 80,
-        behavior: "smooth"
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+
+      // Update button states
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+
+      // Update all translatable elements
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        const translation = translations[lang][key];
+        if (translation) {
+          el.innerHTML = translation;
+        }
+      });
+    }
+
+    // Language toggle buttons
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        setLanguage(btn.dataset.lang);
       });
     });
-  });
 
-  // Fade-in on scroll
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        observer.unobserve(entry.target);
+    // Initialize with English on page load
+    setLanguage('en');
+
+    // Team member popover edge alignment
+    (function () {
+      function alignTeamPopovers() {
+        document.querySelectorAll('.team-member').forEach(function (card) {
+          card.classList.remove('pop-left', 'pop-right');
+          var rect = card.getBoundingClientRect();
+          var popW = Math.min(500, window.innerWidth - 48);
+          var halfPop = popW / 2;
+          var cardCenterX = rect.left + rect.width / 2;
+          var halfCard = rect.width / 2;
+          // Set arrow offset relative to card edge for edge-aligned popovers
+          card.style.setProperty('--card-arrow', Math.round(halfCard - 6) + 'px');
+          if (cardCenterX - halfPop < 16) {
+            card.classList.add('pop-left');
+          } else if (cardCenterX + halfPop > window.innerWidth - 16) {
+            card.classList.add('pop-right');
+          }
+        });
       }
-    });
-  }, { threshold: 0.15 });
+      alignTeamPopovers();
+      window.addEventListener('resize', alignTeamPopovers);
+    })();
 
-  document.querySelectorAll(".fade-in").forEach(function(el) {
-    observer.observe(el);
-  });
-</script>
+    // Smooth scroll for nav buttons/links
+    document.querySelectorAll("[data-scroll], header a[href^='#']").forEach(function (el) {
+      el.addEventListener("click", function (e) {
+        e.preventDefault();
+        var target = this.getAttribute("data-scroll") || this.getAttribute("href");
+        var node = document.querySelector(target);
+        if (!node) return;
+        window.scrollTo({
+          top: node.offsetTop - 80,
+          behavior: "smooth"
+        });
+      });
+    });
+
+    // Fade-in on scroll
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll(".fade-in").forEach(function (el) {
+      observer.observe(el);
+    });
+
+    // Auto-inject current year
+    document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+    // Leaflet Map for Location Card
+    (function () {
+      var mapEl = document.getElementById('locationMap');
+      if (!mapEl || typeof L === 'undefined') return;
+
+      var map = L.map('locationMap', {
+        center: [20, 0],
+        zoom: 2,
+        zoomControl: true,
+        attributionControl: true,
+        scrollWheelZoom: true
+      });
+
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '',
+        subdomains: 'abcd',
+        maxZoom: 19
+      }).addTo(map);
+
+      var greenIcon = L.divIcon({
+        className: 'leaflet-pin-custom',
+        html: '<div style="width:14px;height:14px;background:#22c55e;border-radius:50%;border:3px solid rgba(34,197,94,0.3);box-shadow:0 0 12px rgba(34,197,94,0.5)"></div>',
+        iconSize: [14, 14],
+        iconAnchor: [7, 7]
+      });
+
+      L.marker([44.3131, 23.7883], { icon: greenIcon })
+        .addTo(map)
+        .bindPopup('<strong>Bulevardul Știrbei Vodă 5, 200352 Craiova</strong>');
+
+      // Fly in on scroll – smooth and slow, triggers when user scrolls to the map
+      var mapObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            setTimeout(function () {
+              map.flyTo([44.3131, 23.7883], 15, { duration: 12, easeLinearity: 0.02 });
+            }, 400);
+            mapObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.25 });
+      mapObserver.observe(mapEl);
+    })();
+
+      </script>
 </body>
+
 </html>

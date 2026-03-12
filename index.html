@@ -7,7 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description"
     content="Soft Hoarders – FTC Robotics Team 12560 from Craiova, Romania. Building robots and a stronger STEM community since 2016. Qualified for European Premier Event 2025.">
-  <link rel="icon" type="image/png" href="https://soft-hoarders.com/logo.png">
+  <link rel="icon" type="image/png" href="/icons/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
+  <link rel="shortcut icon" href="/icons/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Soft Hoarders" />
+  <link rel="manifest" href="/icons/site.webmanifest" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
@@ -799,9 +804,55 @@
       box-shadow: 0 18px 46px rgba(0, 0, 0, 0.75);
     }
 
+    /* Sponsor carousel */
+    .sponsors-carousel-outer {
+      overflow: hidden;
+      padding: 28px 0 20px;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+    }
+
+    .sponsors-track {
+      display: flex;
+      gap: 56px;
+      width: max-content;
+      animation: sponsors-scroll 26s linear infinite;
+    }
+
+    .sponsors-track:hover {
+      animation-play-state: paused;
+    }
+
+    .sponsors-track img {
+      height: 44px;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      opacity: 0.55;
+      transition: opacity 0.25s ease, filter 0.25s ease;
+      flex-shrink: 0;
+      display: block;
+    }
+
+    .sponsors-track img:hover {
+      opacity: 1;
+      filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(34,197,94,0.6));
+    }
+
+    @keyframes sponsors-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .sponsors-divider {
+      border: none;
+      border-top: 1px solid rgba(34, 197, 94, 0.15);
+      margin: 4px 0 0;
+    }
+
     .sponsors-contact {
       text-align: center;
-      padding: 40px 20px;
+      padding: 28px 20px 20px;
     }
 
     .sponsors-contact p {
@@ -1611,7 +1662,6 @@
             <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">KA</div><div class="team-member-name">Karina</div><div class="team-member-desc" data-i18n="team.karina"></div></div>
             <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">MA</div><div class="team-member-name">Matei</div><div class="team-member-desc" data-i18n="team.matei"></div></div>
             <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">RA</div><div class="team-member-name">Rareș</div><div class="team-member-desc" data-i18n="team.rares2"></div></div>
-            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">TH</div><div class="team-member-name">Theodor</div><div class="team-member-desc" data-i18n="team.theodor"></div></div>
             <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">VL</div><div class="team-member-name">Vladimir</div><div class="team-member-desc" data-i18n="team.vladimir"></div></div>
           </div>
 
@@ -1633,6 +1683,31 @@
           </p>
 
           <div class="sponsors-wrap">
+            <!-- Sponsor logo carousel -->
+            <div class="sponsors-carousel-outer">
+              <div class="sponsors-track">
+                <!-- set 1 -->
+                <img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/Qfort.png" alt="Qfort">
+                <img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/biz.png" alt="Biz">
+                <img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/caphyon.png" alt="Caphyon">
+                <img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/hella.png" alt="Hella">
+                <img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/netrom.png" alt="Netrom">
+                <img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/stamford.png" alt="Stamford">
+                <img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/syncro.png" alt="Syncro">
+                <img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/electroputeremall.png" alt="Electroputere Mall">
+                <!-- set 2 (duplicate for seamless loop) -->
+                <img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/Qfort.png" alt="Qfort">
+                <img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/biz.png" alt="Biz">
+                <img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/caphyon.png" alt="Caphyon">
+                <img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/hella.png" alt="Hella">
+                <img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/netrom.png" alt="Netrom">
+                <img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/stamford.png" alt="Stamford">
+                <img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/syncro.png" alt="Syncro">
+                <img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/electroputeremall.png" alt="Electroputere Mall">
+              </div>
+            </div>
+            <hr class="sponsors-divider">
+            <!-- Get in touch -->
             <div class="sponsors-contact">
               <p data-i18n="sponsors.cta">
                 Interested in sponsoring our team? We'd love to hear from you.

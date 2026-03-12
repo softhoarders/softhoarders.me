@@ -1,5 +1,5 @@
 
-# softhoarders.me
+# softhoarders.me && soft-hoarders.com
 
 A single-page static website for Soft Hoarders — the FTC Robotics team from Craiova, Romania. The site presents the team's mission, achievements, upcoming events, sponsors, and team roster.
 

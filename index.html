@@ -1134,6 +1134,25 @@
       transition: opacity 0.22s ease, transform 0.22s ease;
     }
 
+    /* Pop-up variant: tooltip appears above the card */
+    .team-member.pop-up .team-member-desc {
+      top: auto;
+      bottom: calc(100% + 10px);
+      transform: translateX(-50%) translateY(10px);
+    }
+    .team-member.pop-up:hover .team-member-desc,
+    .team-member.pop-up.expanded .team-member-desc {
+      transform: translateX(-50%) translateY(0);
+    }
+    .team-member.pop-up .team-member-desc::before {
+      top: auto;
+      bottom: -7px;
+      border-left: none;
+      border-top: none;
+      border-right: 1px solid rgba(34, 197, 94, 0.22);
+      border-bottom: 1px solid rgba(34, 197, 94, 0.22);
+    }
+
     /* Edge-card alignment fixes */
     .team-member.pop-left .team-member-desc {
       left: 0;
@@ -1673,8 +1692,8 @@
 
           <h3 class="team-group-title" data-i18n="team.mentors_title">Mentors</h3>
           <div class="team-grid">
-            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">AU</div><div class="team-member-name">Aurora Simon</div><div class="team-member-desc" data-i18n="team.aurora"></div></div>
-            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">PO</div><div class="team-member-name">Popoi Silviu</div><div class="team-member-desc" data-i18n="team.popoi"></div></div>
+            <div class="team-member pop-up" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">AU</div><div class="team-member-name">Aurora Simon</div><div class="team-member-desc" data-i18n="team.aurora"></div></div>
+            <div class="team-member pop-up" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">PO</div><div class="team-member-name">Popoi Liviu</div><div class="team-member-desc" data-i18n="team.popoi"></div></div>
           </div>
         </section>
 

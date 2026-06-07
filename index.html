@@ -3,18 +3,24 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Soft Hoarders</title>
+  <title>Soft Hoarders | FTC Robotics Team 12560 – STEM Education in Craiova, Romania</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description"
-    content="Soft Hoarders – FTC Robotics Team 12560 from Craiova, Romania. Building robots and a stronger STEM community since 2016. Qualified for European Premier Event 2025.">
+    content="Soft Hoarders is a nonprofit FIRST Tech Challenge robotics team from Craiova, Romania. We inspire youth through STEM education, workshops, and community outreach since 2016.">
+  <meta name="keywords" content="FTC robotics, STEM education, nonprofit, Craiova, Romania, youth outreach, FIRST Tech Challenge">
+  <link rel="canonical" href="https://www.soft-hoarders.com/" />
+  <meta property="og:title" content="Soft Hoarders – STEM Robotics &amp; Community Outreach">
+  <meta property="og:description" content="Nonprofit FTC Team 12560 inspiring youth through robotics, workshops, and STEM education in Craiova, Romania since 2016.">
+  <meta property="og:url" content="https://www.soft-hoarders.com/">
+  <meta property="og:type" content="website">
   <link rel="icon" type="image/png" href="/icons/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
   <link rel="shortcut icon" href="/icons/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
   <meta name="apple-mobile-web-app-title" content="Soft Hoarders" />
   <link rel="manifest" href="/icons/site.webmanifest" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="preconnect" href="https://216exjbj16kz64yd.public.blob.vercel-storage.com" crossorigin>
+  <link rel="dns-prefetch" href="https://216exjbj16kz64yd.public.blob.vercel-storage.com">
   <style>
     :root {
       --bg-dark: #050608;
@@ -1312,31 +1318,100 @@
       opacity: 1;
       transform: translateY(0);
     }
-  </style>
 
-  <script>
-    // Fetch FTC Scout data as early as possible
-    window.ftcScoutPromise = fetch('https://api.ftcscout.org/graphql', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query: '{ teamByNumber(number: 12560) { events(season: 2025) { eventCode event { name start end location { city state country } } stats { ... on TeamEventStats2025 { opr { totalPointsNp } rank wins losses ties qualMatchesPlayed } } } } }' })
-    }).then(r => r.json());
-  </script>
+    /* Ad Grants: skip link & mission banner */
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 16px;
+      padding: 10px 16px;
+      background: var(--accent);
+      color: #022c22;
+      font-weight: 600;
+      font-size: 13px;
+      border-radius: 8px;
+      z-index: 1000;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus {
+      top: 12px;
+    }
+
+    .mission-banner {
+      margin-top: 20px;
+      padding: 16px 18px;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      background: rgba(34, 197, 94, 0.06);
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+    .mission-banner strong {
+      color: var(--accent-soft);
+    }
+
+    /* About & Programs — reuse card patterns */
+    .about-facts dd {
+      font-size: 0.94rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .about-facts dt {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 12px;
+    }
+    .about-facts dt:first-child { margin-top: 0; }
+
+    .cards-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    @media (max-width: 900px) {
+      .cards-2 { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    .footer-mission {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      max-width: 42rem;
+      line-height: 1.55;
+      margin-top: 8px;
+    }
+
+    .map-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: var(--radius-lg);
+    }
+  </style>
 </head>
 
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
   <div class="page">
     <header>
       <div class="nav-inner">
         <div class="logo-mark">
-          <div class="logo-icon"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logo.png" alt="Soft Hoarders Logo"></div>
+          <div class="logo-icon"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logo.png" alt="Soft Hoarders Logo" width="32" height="32" decoding="async"></div>
           <div>
             <div class="logo-text-main">SOFT HOARDERS</div>
             <div class="logo-text-sub">12560 · RO031</div>
           </div>
         </div>
         <div class="nav-right">
-          <nav class="nav-links">
+          <nav class="nav-links" aria-label="Main navigation">
+            <a href="#about" data-i18n="nav.about">About</a>
+            <a href="#programs" data-i18n="nav.programs">Programs</a>
             <a href="#goals" data-i18n="nav.goals">Goals</a>
             <a href="#achievements" data-i18n="nav.achievements">Achievements</a>
             <a href="#competitions" data-i18n="nav.competitions">Competitions</a>
@@ -1345,8 +1420,8 @@
             <a href="#team" data-i18n="nav.team">Team</a>
           </nav>
           <div class="lang-toggle">
-            <button class="lang-btn active" data-lang="en">EN</button>
-            <button class="lang-btn" data-lang="ro">RO</button>
+            <button class="lang-btn active" data-lang="en" aria-label="English">EN</button>
+            <button class="lang-btn" data-lang="ro" aria-label="Romanian">RO</button>
           </div>
           <a href="#contact" class="nav-cta">
             <span class="nav-cta-dot"></span>
@@ -1368,7 +1443,7 @@
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-header">
         <div class="logo-mark">
-          <div class="logo-icon"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logo.png" alt="Soft Hoarders Logo"></div>
+          <div class="logo-icon"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logo.png" alt="Soft Hoarders Logo" width="32" height="32" decoding="async"></div>
           <div>
             <div class="logo-text-main">SOFT HOARDERS</div>
             <div class="logo-text-sub">12560 · RO031</div>
@@ -1376,7 +1451,9 @@
         </div>
         <button class="sidebar-close" id="sidebarClose">&#x2715;</button>
       </div>
-      <nav class="sidebar-nav">
+      <nav class="sidebar-nav" aria-label="Mobile navigation">
+        <a href="#about" data-i18n="nav.about">About</a>
+        <a href="#programs" data-i18n="nav.programs">Programs</a>
         <a href="#goals" data-i18n="nav.goals">Goals</a>
         <a href="#achievements" data-i18n="nav.achievements">Achievements</a>
         <a href="#competitions" data-i18n="nav.competitions">Competitions</a>
@@ -1386,8 +1463,8 @@
       </nav>
       <div class="sidebar-footer">
         <div class="lang-toggle">
-          <button class="lang-btn active" data-lang="en">EN</button>
-          <button class="lang-btn" data-lang="ro">RO</button>
+          <button class="lang-btn active" data-lang="en" aria-label="English">EN</button>
+          <button class="lang-btn" data-lang="ro" aria-label="Romanian">RO</button>
         </div>
         <a href="#contact" class="sidebar-cta">
           <span class="nav-cta-dot"></span>
@@ -1396,7 +1473,7 @@
       </div>
     </aside>
 
-    <main>
+    <main id="main-content">
       <div class="shell">
         <!-- Hero -->
         <section class="hero fade-in">
@@ -1435,6 +1512,10 @@
                 </button>
               </div>
 
+              <div class="mission-banner" data-i18n="hero.mission">
+                <strong>Our mission:</strong> Soft Hoarders is a student-led nonprofit robotics team that uses FIRST Tech Challenge to make STEM education accessible, hands-on, and inspiring for young people in Craiova and across Romania.
+              </div>
+
               <div class="hero-note" data-i18n="hero.note">
                 Qualified for the European Premier Event <strong>2025</strong>,
                 representing Romania on the international stage for the third time.
@@ -1447,7 +1528,7 @@
                 <div class="hero-visual-title" data-i18n="hero.robot">Robot · Shazam</div>
                 <div class="hero-visual-main">
                   <div class="hero-robot">
-                    <img src="https://zjsus95m9ihjd9xt.public.blob.vercel-storage.com/robot" alt="DECODE Robot">
+                    <img src="/images/robot.webp" alt="Soft Hoarders FTC competition robot Shazam" width="760" height="760" loading="lazy" decoding="async">
                   </div>
                   <div class="hero-visual-footer">
                     <div>
@@ -1463,6 +1544,91 @@
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        <!-- About / Mission -->
+        <section id="about" class="fade-in">
+          <div class="section-label" data-i18n="about.label">About Us</div>
+          <h2 class="section-title" data-i18n="about.title">Who we are and what we stand for</h2>
+          <p class="section-lead" data-i18n="about.p1">
+            Soft Hoarders (FTC Team 12560, RO031) is a nonprofit student robotics team based at "Frații Buzești" National College in Craiova, Romania. Since 2016, we have competed in FIRST Tech Challenge — a global program that teaches engineering, programming, teamwork, and community leadership through real-world robot design and competition.
+          </p>
+          <div class="cards-3">
+            <article class="card">
+              <div class="card-label">01</div>
+              <h3 class="card-title" data-i18n="about.card2.title">Educational mission</h3>
+              <p class="card-body" data-i18n="about.p2">
+                We are not a commercial organization. Our work is educational and community-focused: we build robots, mentor younger students, run STEM workshops, and represent Romania at international FTC events. Every season, our students learn skills that prepare them for careers in engineering, software, design, and science — while giving back to the community that supports us.
+              </p>
+            </article>
+            <article class="card">
+              <div class="card-label">02</div>
+              <h3 class="card-title" data-i18n="about.card3.title">Open collaboration</h3>
+              <p class="card-body" data-i18n="about.p3">
+                Our team operates under the guidance of faculty mentors and is supported by sponsors who believe in youth STEM education. We publish our activities openly, welcome collaboration with schools and organizations, and invite anyone interested in robotics or STEM outreach to get in touch.
+              </p>
+            </article>
+            <article class="card">
+              <div class="card-label">03</div>
+              <h3 class="card-title" data-i18n="about.card4.title">Team details</h3>
+              <dl class="about-facts">
+                <dt data-i18n="about.fact1.label">Organization</dt>
+                <dd data-i18n="about.fact1.value">Nonprofit FTC Robotics Team #12560</dd>
+                <dt data-i18n="about.fact2.label">Location</dt>
+                <dd data-i18n="about.fact2.value">Craiova, Dolj County, Romania</dd>
+                <dt data-i18n="about.fact3.label">Founded</dt>
+                <dd data-i18n="about.fact3.value">2016 — 9 consecutive national qualifications</dd>
+                <dt data-i18n="about.fact4.label">Affiliation</dt>
+                <dd data-i18n="about.fact4.value">FIRST Tech Challenge · Colegiul Național "Frații Buzești"</dd>
+                <dt data-i18n="about.fact5.label">Contact</dt>
+                <dd><a href="mailto:team@soft-hoarders.com" style="color: var(--accent-soft);">team@soft-hoarders.com</a></dd>
+              </dl>
+            </article>
+          </div>
+        </section>
+
+        <!-- Programs / Services -->
+        <section id="programs" class="fade-in">
+          <div class="section-label" data-i18n="programs.label">Programs &amp; Services</div>
+          <h2 class="section-title" data-i18n="programs.title">How we serve our community</h2>
+          <p class="section-lead" data-i18n="programs.lead">
+            Beyond building competition robots, Soft Hoarders runs ongoing STEM education and outreach programs for students, schools, and the public in Craiova and beyond.
+          </p>
+          <div class="cards-2">
+            <article class="card">
+              <div class="card-label">01</div>
+              <h3 class="card-title" data-i18n="programs.p1.title">Competitive Robotics (FTC)</h3>
+              <p class="card-body" data-i18n="programs.p1.body">
+                Each season, our students design, build, program, and compete with a fully autonomous and tele-operated robot. Through FTC, members develop engineering, CAD, software, and project management skills while learning Gracious Professionalism and Coopertition — core FIRST values.
+              </p>
+            </article>
+            <article class="card">
+              <div class="card-label">02</div>
+              <h3 class="card-title" data-i18n="programs.p2.title">STEM Workshops &amp; Demos</h3>
+              <p class="card-body" data-i18n="programs.p2.body">
+                We organize hands-on workshops and robot demonstrations for elementary and middle school students, introducing them to mechanics, coding, and problem-solving. In the 2024–2025 season alone, we participated in 57+ outreach events across Romania.
+              </p>
+            </article>
+            <article class="card">
+              <div class="card-label">03</div>
+              <h3 class="card-title" data-i18n="programs.p3.title">School &amp; Community Partnerships</h3>
+              <p class="card-body" data-i18n="programs.p3.body">
+                We collaborate with local schools, libraries, and community organizations to bring robotics and STEM activities to audiences who might not otherwise have access. We welcome invitations to present at fairs, open days, and educational events.
+              </p>
+            </article>
+            <article class="card">
+              <div class="card-label">04</div>
+              <h3 class="card-title" data-i18n="programs.p4.title">Mentorship &amp; Team Development</h3>
+              <p class="card-body" data-i18n="programs.p4.body">
+                Senior team members mentor new recruits through a structured onboarding process covering mechanical assembly, Java programming, 3D design, and marketing. Our mentors — teachers from Frații Buzești College — provide ongoing academic and technical guidance.
+              </p>
+            </article>
+          </div>
+          <div class="sponsors-contact">
+            <p data-i18n="programs.cta.text">Want us at your school or event? Interested in sponsoring our STEM programs? We would love to hear from you.</p>
+            <a href="mailto:team@soft-hoarders.com?subject=STEM%20Outreach%20Request" class="btn-primary" data-i18n="programs.cta.invite">Invite Us to an Event</a>
+            <a href="#sponsors" class="btn-ghost" data-scroll="#sponsors" data-i18n="programs.cta.sponsor">Become a Sponsor</a>
           </div>
         </section>
 
@@ -1590,71 +1756,9 @@
           <div id="resultsGrid" class="results-grid">
             <div class="results-loading">
               <div class="spinner"></div>
-              <p>Loading data from FTC Scout...</p>
+              <p data-i18n="results.loading">Loading competition results…</p>
             </div>
           </div>
-          <script>
-            // Render as soon as resultsGrid is parsed
-            (function () {
-              var grid = document.getElementById('resultsGrid');
-              if (!grid || !window.ftcScoutPromise) return;
-
-              window.ftcScoutPromise.then(function (data) {
-                if (!data.data || !data.data.teamByNumber || !data.data.teamByNumber.events) {
-                  throw new Error('No data');
-                }
-                var events = data.data.teamByNumber.events;
-                // Sort by event start date descending and take last 3
-                events.sort(function (a, b) {
-                  return new Date(b.event.start) - new Date(a.event.start);
-                });
-                events = events.slice(0, 3);
-
-                grid.innerHTML = '';
-                events.forEach(function (ev) {
-                  var e = ev.event;
-                  var s = ev.stats;
-                  var loc = e.location ? (e.location.city || '') + (e.location.country ? ', ' + e.location.country : '') : '';
-                  var dateStr = e.start ? new Date(e.start).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
-                  var rank = s ? s.rank : '—';
-                  var wins = s ? s.wins : 0;
-                  var losses = s ? s.losses : 0;
-                  var ties = s ? s.ties : 0;
-                  var opr = s && s.opr ? Math.round(s.opr.totalPointsNp * 10) / 10 : '—';
-                  var qmp = s ? s.qualMatchesPlayed : 0;
-
-                  var card = document.createElement('div');
-                  card.className = 'result-card';
-                  card.innerHTML =
-                    '<div class="result-card-header">' +
-                    '  <div>' +
-                    '    <div class="result-card-title">' + (e.name || ev.eventCode) + '</div>' +
-                    '    <div class="result-card-meta">' + dateStr + (loc ? ' · ' + loc : '') + '</div>' +
-                    '  </div>' +
-                    '  <div class="result-rank">#' + rank + '</div>' +
-                    '</div>' +
-                    '<div class="result-wlt">' +
-                    '  <div class="result-wlt-item result-wlt-w">' + wins + 'W</div>' +
-                    '  <div class="result-wlt-item result-wlt-l">' + losses + 'L</div>' +
-                    '  <div class="result-wlt-item result-wlt-t">' + ties + 'T</div>' +
-                    '</div>' +
-                    '<div class="result-stats">' +
-                    '  <div class="result-stat"><div class="result-stat-value">' + opr + '</div><div class="result-stat-label">OPR</div></div>' +
-                    '  <div class="result-stat"><div class="result-stat-value">' + qmp + '</div><div class="result-stat-label">Matches</div></div>' +
-                    '  <div class="result-stat"><div class="result-stat-value">#' + rank + '</div><div class="result-stat-label">Rank</div></div>' +
-                    '</div>' +
-                    '<a href="https://ftcscout.org/events/2025/' + ev.eventCode + '/matches" target="_blank" rel="noreferrer" class="result-link">View on FTC Scout →</a>';
-                  grid.appendChild(card);
-                });
-              }).catch(function (err) {
-                console.warn('FTC Scout API error:', err);
-                grid.innerHTML =
-                  '<div class="results-loading">' +
-                  '<p>Could not load data from FTC Scout. <a href="https://ftcscout.org/teams/12560" target="_blank" rel="noreferrer" style="color:#22c55e">View on ftcscout.org</a></p>' +
-                  '</div>';
-              });
-            })();
-          </script>
         </section>
 
         <!-- Team -->
@@ -1712,21 +1816,21 @@
             <div class="sponsors-carousel-outer">
               <div class="sponsors-track">
                 <!-- set 1 -->
-                <a href="https://www.facebook.com/QFORTRomania/" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/Qfort.png" alt="Qfort"></a>
-                <a href="https://www.biz-solutions.ro" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/biz.png" alt="Biz Solutions"></a>
-                <a href="https://caphyon.ro" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/caphyon.png" alt="Caphyon"></a>
-                <a href="https://www.hella.com/en/" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/hella.png" alt="Forvia Hella"></a>
-                <a href="https://www.netromsoftware.ro" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/netrom.png" alt="Netrom"></a>
-                <a href="https://www.stamford-avk.com" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/stamford.png" alt="Stamford AVK"></a>
-                <a href="https://www.sync.ro" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/syncro.png" alt="Syncrosoft"></a>
+                <a href="https://www.facebook.com/QFORTRomania/" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/Qfort.png" alt="Qfort" width="120" height="48" loading="lazy" decoding="async"></a>
+                <a href="https://www.biz-solutions.ro" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/biz.png" alt="Biz Solutions" width="120" height="48" loading="lazy" decoding="async"></a>
+                <a href="https://caphyon.ro" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/caphyon.png" alt="Caphyon" width="120" height="48" loading="lazy" decoding="async"></a>
+                <a href="https://www.hella.com/en/" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/hella.png" alt="Forvia Hella" width="120" height="48" loading="lazy" decoding="async"></a>
+                <a href="https://www.netromsoftware.ro" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/netrom.png" alt="Netrom" width="120" height="48" loading="lazy" decoding="async"></a>
+                <a href="https://www.stamford-avk.com" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/stamford.png" alt="Stamford AVK" width="120" height="48" loading="lazy" decoding="async"></a>
+                <a href="https://www.sync.ro" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/syncro.png" alt="Syncrosoft" width="120" height="48" loading="lazy" decoding="async"></a>
                 <!-- set 2 (duplicate for seamless loop) -->
-                <a href="https://www.facebook.com/QFORTRomania/" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/Qfort.png" alt="Qfort"></a>
-                <a href="https://www.biz-solutions.ro" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/biz.png" alt="Biz Solutions"></a>
-                <a href="https://caphyon.ro" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/caphyon.png" alt="Caphyon"></a>
-                <a href="https://www.hella.com/en/" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/hella.png" alt="Forvia Hella"></a>
-                <a href="https://www.netromsoftware.ro" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/netrom.png" alt="Netrom"></a>
-                <a href="https://www.stamford-avk.com" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/stamford.png" alt="Stamford AVK"></a>
-                <a href="https://www.sync.ro" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/syncro.png" alt="Syncrosoft"></a>
+                <a href="https://www.facebook.com/QFORTRomania/" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/Qfort.png" alt="" width="120" height="48" loading="lazy" decoding="async" aria-hidden="true"></a>
+                <a href="https://www.biz-solutions.ro" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/biz.png" alt="" width="120" height="48" loading="lazy" decoding="async" aria-hidden="true"></a>
+                <a href="https://caphyon.ro" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/caphyon.png" alt="" width="120" height="48" loading="lazy" decoding="async" aria-hidden="true"></a>
+                <a href="https://www.hella.com/en/" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/hella.png" alt="" width="120" height="48" loading="lazy" decoding="async" aria-hidden="true"></a>
+                <a href="https://www.netromsoftware.ro" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/netrom.png" alt="" width="120" height="48" loading="lazy" decoding="async" aria-hidden="true"></a>
+                <a href="https://www.stamford-avk.com" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/stamford.png" alt="" width="120" height="48" loading="lazy" decoding="async" aria-hidden="true"></a>
+                <a href="https://www.sync.ro" target="_blank" rel="noopener"><img src="https://216exjbj16kz64yd.public.blob.vercel-storage.com/logouri%20sponsori/syncro.png" alt="" width="120" height="48" loading="lazy" decoding="async" aria-hidden="true"></a>
               </div>
             </div>
             <hr class="sponsors-divider">
@@ -1745,11 +1849,11 @@
         <!-- Contact -->
         <section id="contact" class="fade-in">
           <div class="section-label" data-i18n="contact.label">Contact</div>
-          <h2 class="section-title" data-i18n="contact.title">Find us on the map</h2>
+          <h2 class="section-title" data-i18n="contact.title">Contact us</h2>
           <p class="section-lead" data-i18n="contact.lead">
             We are based at "Frații Buzești" National College in Craiova.
-            Reach out if you want to collaborate, invite us to an event, or
-            learn more about FTC.
+            Reach out if you want to collaborate, invite us to an event, sponsor our programs,
+            or learn more about FTC robotics.
           </p>
           <div class="contact-grid">
             <div class="contact-card">
@@ -1767,7 +1871,9 @@
               </div>
             </div>
             <div class="contact-card" style="padding: 0;">
-                <div id="locationMap" style="height: 100%; min-height: 300px; border-radius: var(--radius-lg); margin: 0; border: none;"></div>
+                <div id="locationMap" class="map-placeholder" style="height: 100%; min-height: 300px; border-radius: var(--radius-lg); margin: 0; border: none;">
+                  <span data-i18n="contact.map.loading">Map loading…</span>
+                </div>
             </div>
           </div>
         </section>
@@ -1776,8 +1882,12 @@
 
     <footer>
       <div class="footer-inner">
-        <div>© <span id="footerYear"></span> Soft Hoarders #12560. <span data-i18n="footer.rights">All rights
-            reserved.</span> · Made with <span style="color: #22c55e;">❤</span> in the heart of Craiova</div>
+        <div>
+          <div>© <span id="footerYear"></span> Soft Hoarders #12560. <span data-i18n="footer.rights">All rights reserved.</span> · Made with <span style="color: #22c55e;">❤</span> in the heart of Craiova</div>
+          <p class="footer-mission" data-i18n="footer.mission">
+            Soft Hoarders is a nonprofit FIRST Tech Challenge robotics team dedicated to STEM education and youth outreach in Craiova, Romania. Team 12560 · RO031 · Est. 2016.
+          </p>
+        </div>
         <div class="footer-links">
           <a href="https://www.instagram.com/soft.hoarders/" target="_blank" rel="noreferrer">Instagram</a>
           <a href="https://www.facebook.com/SoftHoarders" target="_blank" rel="noreferrer">Facebook</a>
@@ -1814,6 +1924,9 @@
         'team.aurora': "Ever since I met the robotics team, seeing them as children, as young people who sacrifice their time for their dreams, I chose to stay by their side. Starting last season, I gained the status of mentor for the SoftHoarders robotics team and I supported them every moment, ensuring a close connection with the college where they study. Even though the subject I teach is part of the smaller but essential percentage of knowledge needed in this competition, the passion I saw in their work has maintained my love for this team and these young people.",
         'team.popoi': "From the perspective of a physics teacher, I can confess that I was surprised by the knowledge of my students who are part of the high school robotics team. I was pleasantly impressed by their capabilities and desire to learn within a field that the school fails to cover entirely. I am glad I have the opportunity to support such talented young people and I am convinced that I will witness the first steps of the future revolutionary generation of engineers, programmers and experts.",
         'nav.goals': 'Goals',
+        'nav.about': 'About',
+        'nav.programs': 'Programs',
+        'nav.support': 'Support Us',
         'nav.achievements': 'Achievements',
         'nav.competitions': 'Competitions',
         'nav.sponsors': 'Sponsors',
@@ -1829,12 +1942,46 @@
         'hero.league': 'League',
         'hero.since': 'Since',
         'hero.explore': 'Explore',
+        'hero.cta.programs': 'Our Programs',
+        'hero.cta.support': 'Support Our Mission',
+        'hero.mission': '<strong>Our mission:</strong> Soft Hoarders is a student-led nonprofit robotics team that uses FIRST Tech Challenge to make STEM education accessible, hands-on, and inspiring for young people in Craiova and across Romania.',
         'hero.findus': 'Find us on the map',
         'hero.note': 'Qualified for the European Premier Event <strong>2025</strong>, representing Romania on the international stage for the third time.',
         'hero.robot': 'Robot · Shazam',
         'hero.status': 'Control Hub Status',
         'hero.ready': 'CONNECTED · MATCH READY',
         'goals.label': 'Goals',
+        'about.label': 'About Us',
+        'about.title': 'Who we are and what we stand for',
+        'about.p1': 'Soft Hoarders (FTC Team 12560, RO031) is a nonprofit student robotics team based at "Frații Buzești" National College in Craiova, Romania. Since 2016, we have competed in FIRST Tech Challenge — a global program that teaches engineering, programming, teamwork, and community leadership through real-world robot design and competition.',
+        'about.p2': 'We are not a commercial organization. Our work is educational and community-focused: we build robots, mentor younger students, run STEM workshops, and represent Romania at international FTC events. Every season, our students learn skills that prepare them for careers in engineering, software, design, and science — while giving back to the community that supports us.',
+        'about.p3': 'Our team operates under the guidance of faculty mentors and is supported by sponsors who believe in youth STEM education. We publish our activities openly, welcome collaboration with schools and organizations, and invite anyone interested in robotics or STEM outreach to get in touch.',
+        'about.card2.title': 'Educational mission',
+        'about.card3.title': 'Open collaboration',
+        'about.card4.title': 'Team details',
+        'about.fact1.label': 'Organization',
+        'about.fact1.value': 'Nonprofit FTC Robotics Team #12560',
+        'about.fact2.label': 'Location',
+        'about.fact2.value': 'Craiova, Dolj County, Romania',
+        'about.fact3.label': 'Founded',
+        'about.fact3.value': '2016 — 9 consecutive national qualifications',
+        'about.fact4.label': 'Affiliation',
+        'about.fact4.value': 'FIRST Tech Challenge · Colegiul Național "Frații Buzești"',
+        'about.fact5.label': 'Contact',
+        'programs.label': 'Programs & Services',
+        'programs.title': 'How we serve our community',
+        'programs.lead': 'Beyond building competition robots, Soft Hoarders runs ongoing STEM education and outreach programs for students, schools, and the public in Craiova and beyond.',
+        'programs.p1.title': 'Competitive Robotics (FTC)',
+        'programs.p1.body': 'Each season, our students design, build, program, and compete with a fully autonomous and tele-operated robot. Through FTC, members develop engineering, CAD, software, and project management skills while learning Gracious Professionalism and Coopertition — core FIRST values.',
+        'programs.p2.title': 'STEM Workshops & Demos',
+        'programs.p2.body': 'We organize hands-on workshops and robot demonstrations for elementary and middle school students, introducing them to mechanics, coding, and problem-solving. In the 2024–2025 season alone, we participated in 57+ outreach events across Romania.',
+        'programs.p3.title': 'School & Community Partnerships',
+        'programs.p3.body': 'We collaborate with local schools, libraries, and community organizations to bring robotics and STEM activities to audiences who might not otherwise have access. We welcome invitations to present at fairs, open days, and educational events.',
+        'programs.p4.title': 'Mentorship & Team Development',
+        'programs.p4.body': 'Senior team members mentor new recruits through a structured onboarding process covering mechanical assembly, Java programming, 3D design, and marketing. Our mentors — teachers from Frații Buzești College — provide ongoing academic and technical guidance.',
+        'programs.cta.text': 'Want us at your school or event? Interested in sponsoring our STEM programs? We would love to hear from you.',
+        'programs.cta.invite': 'Invite Us to an Event',
+        'programs.cta.sponsor': 'Become a Sponsor',
         'goals.title': 'What drives our team',
         'goals.lead': 'From the first brainstorming session to the final match, we focus on growth, innovation, and sharing our passion for STEM with as many people as possible.',
         'goals.card1.title': 'Self-Improvement',
@@ -1872,13 +2019,16 @@
         'sponsors.cta': 'Interested in sponsoring our team? We\'d love to hear from you.',
         'sponsors.button': 'Get in Touch',
         'contact.label': 'Contact',
-        'contact.title': 'Find us on the map',
-        'contact.lead': 'We are based at "Frații Buzești" National College in Craiova. Reach out if you want to collaborate, invite us to an event, or learn more about FTC.',
+        'contact.title': 'Contact us',
+        'contact.lead': 'We are based at "Frații Buzești" National College in Craiova. Reach out if you want to collaborate, invite us to an event, sponsor our programs, or learn more about FTC robotics.',
         'contact.location.title': 'Location',
         'contact.location.body': 'Bulevardul Știrbei Vodă 5<br>200352 Craiova, Romania',
         'contact.email.title': 'Email',
+        'contact.map.loading': 'Map loading…',
         'footer.rights': 'All rights reserved.',
+        'footer.mission': 'Soft Hoarders is a nonprofit FIRST Tech Challenge robotics team dedicated to STEM education and youth outreach in Craiova, Romania. Team 12560 · RO031 · Est. 2016.',
         'nav.results': 'Results',
+        'results.loading': 'Loading competition results…',
         'results.label': 'Recent Results',
         'results.title': 'Live performance data',
         'results.lead': 'Real-time statistics from our recent FTC events, powered by FTC Scout.',
@@ -1920,6 +2070,9 @@
         'team.aurora': "Încă de când am cunoscut echipa de robotică, pe ei ca copii, ca tineri, care își sacrifică timpul pentru visele lor, am ales să rămân alături. Începând cu sezonul trecut, am căpătat statutul de mentor al echipei de robotică SoftHoarders și i-am sprijinit în fiecare moment, asigurându-le o conexiune strânsă cu colegiul unde studiază. Chiar dacă materia pe care o predau face parte din procentul mai mic, dar esențial, al cunoștințelor necesare în această competiție, pasiunea pe care am văzut-o în activitatea lor mi-a menținut dragostea față de această echipă și tineri.",
         'team.popoi': "Din perspectiva unui profesor de fizică, pot mărturisi că m-au surprins cunoștințele elevilor mei care fac parte din echipa de robotică a liceului. Am rămas plăcut impresionat de capabilitățile lor și dorința de a învăța în cadrul unui domeniu pe care școala nu reușește să îl acopere în totalitate. Mă bucur că am prilejul de a sprijini astfel de tineri talentați și sunt convins că voi asista la primii pași ai viitoarei generații revoluționare de ingineri, programatori și experți.",
         'nav.goals': 'Obiective',
+        'nav.about': 'Despre noi',
+        'nav.programs': 'Programe',
+        'nav.support': 'Susține-ne',
         'nav.achievements': 'Realizări',
         'nav.competitions': 'Competiții',
         'nav.sponsors': 'Sponsori',
@@ -1935,12 +2088,46 @@
         'hero.league': 'Liga',
         'hero.since': 'Din',
         'hero.explore': 'Descoperă',
+        'hero.cta.programs': 'Programele noastre',
+        'hero.cta.support': 'Susține misiunea noastră',
+        'hero.mission': '<strong>Misiunea noastră:</strong> Soft Hoarders este o echipă nonprofit de robotică condusă de elevi, care folosește FIRST Tech Challenge pentru a face educația STEM accesibilă, practică și inspirațională pentru tinerii din Craiova și din întreaga Românie.',
         'hero.findus': 'Găsește-ne pe hartă',
         'hero.note': 'Calificată pentru Evenimentul Premier European <strong>2025</strong>, reprezentând România pe scena internațională pentru a treia oară.',
         'hero.robot': 'Robot · Shazam',
         'hero.status': 'Status Control Hub',
         'hero.ready': 'CONECTAT · PREGĂTIT',
         'goals.label': 'Obiective',
+        'about.label': 'Despre noi',
+        'about.title': 'Cine suntem și ce reprezentăm',
+        'about.p1': 'Soft Hoarders (Echipa FTC 12560, RO031) este o echipă nonprofit de robotică a elevilor, bazată la Colegiul Național „Frații Buzești” din Craiova, România. Din 2016, participăm la FIRST Tech Challenge — un program global care predă inginerie, programare, muncă în echipă și leadership comunitar prin proiectarea și competiția cu roboți reali.',
+        'about.p2': 'Nu suntem o organizație comercială. Munca noastră este educațională și orientată spre comunitate: construim roboți, mentorăm elevi mai mici, organizăm ateliere STEM și reprezentăm România la evenimente internaționale FTC. În fiecare sezon, elevii noștri dobândesc competențe pentru cariere în inginerie, software, design și știință — contribuind totodată la comunitatea care ne susține.',
+        'about.p3': 'Echipa noastră funcționează sub îndrumarea mentorilor profesori și este susținută de sponsori care cred în educația STEM pentru tineri. Publicăm activitățile deschis, primim colaborări cu școli și organizații și invităm pe oricine este interesat de robotică sau outreach STEM să ne contacteze.',
+        'about.card2.title': 'Misiune educațională',
+        'about.card3.title': 'Colaborare deschisă',
+        'about.card4.title': 'Detalii echipă',
+        'about.fact1.label': 'Organizație',
+        'about.fact1.value': 'Echipă nonprofit de robotică FTC #12560',
+        'about.fact2.label': 'Locație',
+        'about.fact2.value': 'Craiova, județul Dolj, România',
+        'about.fact3.label': 'Fondată',
+        'about.fact3.value': '2016 — 9 calificări naționale consecutive',
+        'about.fact4.label': 'Afiliere',
+        'about.fact4.value': 'FIRST Tech Challenge · Colegiul Național „Frații Buzești”',
+        'about.fact5.label': 'Contact',
+        'programs.label': 'Programe și servicii',
+        'programs.title': 'Cum servim comunitatea',
+        'programs.lead': 'Dincolo de construirea roboților de competiție, Soft Hoarders derulează programe continue de educație STEM și outreach pentru elevi, școli și publicul din Craiova și nu numai.',
+        'programs.p1.title': 'Robotică competitivă (FTC)',
+        'programs.p1.body': 'În fiecare sezon, elevii noștri proiectează, construiesc, programează și concurează cu un robot complet autonom și tele-operat. Prin FTC, membrii dezvoltă competențe de inginerie, CAD, software și management de proiect, învățând Gracious Professionalism și Coopertition — valori fundamentale FIRST.',
+        'programs.p2.title': 'Ateliere și demonstrații STEM',
+        'programs.p2.body': 'Organizăm ateliere practice și demonstrații cu roboți pentru elevii de gimnaziu și școală primară, introducându-i în mecanică, programare și rezolvarea problemelor. Doar în sezonul 2024–2025 am participat la peste 57 de evenimente de outreach în România.',
+        'programs.p3.title': 'Parteneriate școlare și comunitare',
+        'programs.p3.body': 'Colaborăm cu școli locale, biblioteci și organizații comunitare pentru a aduce robotică și activități STEM către publicuri care altfel nu ar avea acces. Primim cu plăcere invitații la târguri, zile deschise și evenimente educaționale.',
+        'programs.p4.title': 'Mentorat și dezvoltarea echipei',
+        'programs.p4.body': 'Membrii seniori mentorizează noii recruți printr-un proces structurat de integrare care acoperă asamblare mecanică, programare Java, design 3D și marketing. Mentorii noștri — profesori de la Colegiul Frații Buzești — oferă îndrumare academică și tehnică continuă.',
+        'programs.cta.text': 'Vrei să venim la școala sau evenimentul tău? Ești interesat să ne sponsorizezi programele STEM? Ne-ar face plăcere să auzim de tine.',
+        'programs.cta.invite': 'Invită-ne la un eveniment',
+        'programs.cta.sponsor': 'Devino sponsor',
         'goals.title': 'Ce ne motivează',
         'goals.lead': 'De la prima sesiune de brainstorming până la meciul final, ne concentrăm pe creștere, inovație și împărtășirea pasiunii pentru STEM cu cât mai mulți oameni.',
         'goals.card1.title': 'Auto-îmbunătățire',
@@ -1978,13 +2165,16 @@
         'sponsors.cta': 'Interesat să ne sponsorizezi? Ne-ar face plăcere să auzim de tine.',
         'sponsors.button': 'Ia Legătura',
         'contact.label': 'Contact',
-        'contact.title': 'Găsește-ne pe hartă',
-        'contact.lead': 'Suntem bazați la Colegiul Național "Frații Buzești" din Craiova. Contactează-ne dacă vrei să colaborăm, să ne inviți la un eveniment sau să afli mai multe despre FTC.',
+        'contact.title': 'Contactează-ne',
+        'contact.lead': 'Suntem bazați la Colegiul Național „Frații Buzești” din Craiova. Contactează-ne dacă vrei să colaborăm, să ne inviți la un eveniment, să ne sponsorizezi programele sau să afli mai multe despre robotică FTC.',
         'contact.location.title': 'Locație',
         'contact.location.body': 'Bulevardul Știrbei Vodă 5<br>200352 Craiova, România',
         'contact.email.title': 'Email',
+        'contact.map.loading': 'Se încarcă harta…',
         'footer.rights': 'Toate drepturile rezervate.',
+        'footer.mission': 'Soft Hoarders este o echipă nonprofit FIRST Tech Challenge dedicată educației STEM și outreach-ului pentru tineri în Craiova, România. Echipa 12560 · RO031 · Est. 2016.',
         'nav.results': 'Rezultate',
+        'results.loading': 'Se încarcă rezultatele competițiilor…',
         'results.label': 'Rezultate Recente',
         'results.title': 'Date de performanță în timp real',
         'results.lead': 'Statistici în timp real de la evenimentele noastre FTC recente, furnizate de FTC Scout.',
@@ -2105,7 +2295,7 @@
     })();
 
     // Smooth scroll for nav buttons/links
-    document.querySelectorAll("[data-scroll], header a[href^='#']").forEach(function (el) {
+    document.querySelectorAll("[data-scroll], header a[href^='#'], .sponsors-contact a[href^='#']").forEach(function (el) {
       el.addEventListener("click", function (e) {
         e.preventDefault();
         var target = this.getAttribute("data-scroll") || this.getAttribute("href");
@@ -2135,21 +2325,113 @@
     // Auto-inject current year
     document.getElementById('footerYear').textContent = new Date().getFullYear();
 
-    // Leaflet Map for Location Card
+    // Lazy-load FTC Scout results when section is visible
     (function () {
+      var resultsSection = document.getElementById('results');
+      var grid = document.getElementById('resultsGrid');
+      if (!resultsSection || !grid) return;
+
+      function loadResults() {
+        fetch('https://api.ftcscout.org/graphql', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query: '{ teamByNumber(number: 12560) { events(season: 2025) { eventCode event { name start end location { city state country } } stats { ... on TeamEventStats2025 { opr { totalPointsNp } rank wins losses ties qualMatchesPlayed } } } } }' })
+        })
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            if (!data.data || !data.data.teamByNumber || !data.data.teamByNumber.events) {
+              throw new Error('No data');
+            }
+            var events = data.data.teamByNumber.events;
+            events.sort(function (a, b) {
+              return new Date(b.event.start) - new Date(a.event.start);
+            });
+            events = events.slice(0, 3);
+            grid.innerHTML = '';
+            events.forEach(function (ev) {
+              var e = ev.event;
+              var s = ev.stats;
+              var loc = e.location ? (e.location.city || '') + (e.location.country ? ', ' + e.location.country : '') : '';
+              var dateStr = e.start ? new Date(e.start).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+              var rank = s ? s.rank : '—';
+              var wins = s ? s.wins : 0;
+              var losses = s ? s.losses : 0;
+              var ties = s ? s.ties : 0;
+              var opr = s && s.opr ? Math.round(s.opr.totalPointsNp * 10) / 10 : '—';
+              var qmp = s ? s.qualMatchesPlayed : 0;
+              var card = document.createElement('div');
+              card.className = 'result-card';
+              card.innerHTML =
+                '<div class="result-card-header">' +
+                '  <div>' +
+                '    <div class="result-card-title">' + (e.name || ev.eventCode) + '</div>' +
+                '    <div class="result-card-meta">' + dateStr + (loc ? ' · ' + loc : '') + '</div>' +
+                '  </div>' +
+                '  <div class="result-rank">#' + rank + '</div>' +
+                '</div>' +
+                '<div class="result-wlt">' +
+                '  <div class="result-wlt-item result-wlt-w">' + wins + 'W</div>' +
+                '  <div class="result-wlt-item result-wlt-l">' + losses + 'L</div>' +
+                '  <div class="result-wlt-item result-wlt-t">' + ties + 'T</div>' +
+                '</div>' +
+                '<div class="result-stats">' +
+                '  <div class="result-stat"><div class="result-stat-value">' + opr + '</div><div class="result-stat-label">OPR</div></div>' +
+                '  <div class="result-stat"><div class="result-stat-value">' + qmp + '</div><div class="result-stat-label">Matches</div></div>' +
+                '  <div class="result-stat"><div class="result-stat-value">#' + rank + '</div><div class="result-stat-label">Rank</div></div>' +
+                '</div>' +
+                '<a href="https://ftcscout.org/events/2025/' + ev.eventCode + '/matches" target="_blank" rel="noreferrer" class="result-link">View on FTC Scout →</a>';
+              grid.appendChild(card);
+            });
+          })
+          .catch(function () {
+            grid.innerHTML =
+              '<div class="results-loading">' +
+              '<p>Could not load data from FTC Scout. <a href="https://ftcscout.org/teams/12560" target="_blank" rel="noreferrer" style="color:#22c55e">View on ftcscout.org</a></p>' +
+              '</div>';
+          });
+      }
+
+      var resultsObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            loadResults();
+            resultsObserver.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '200px' });
+      resultsObserver.observe(resultsSection);
+    })();
+
+    // Lazy-load Leaflet map when contact section is visible
+    function loadLeafletAssets(callback) {
+      if (window.L) return callback();
+      var css = document.createElement('link');
+      css.rel = 'stylesheet';
+      css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+      document.head.appendChild(css);
+      var script = document.createElement('script');
+      script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+      script.onload = callback;
+      document.body.appendChild(script);
+    }
+
+    function initLocationMap() {
       var mapEl = document.getElementById('locationMap');
       if (!mapEl || typeof L === 'undefined') return;
 
+      mapEl.classList.remove('map-placeholder');
+      mapEl.innerHTML = '';
+
       var map = L.map('locationMap', {
-        center: [20, 0],
-        zoom: 2,
+        center: [44.3131, 23.7883],
+        zoom: 14,
         zoomControl: true,
         attributionControl: true,
-        scrollWheelZoom: true
+        scrollWheelZoom: false
       });
 
       L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        attribution: '',
+        attribution: '&copy; OpenStreetMap',
         subdomains: 'abcd',
         maxZoom: 19
       }).addTo(map);
@@ -2165,18 +2447,23 @@
         .addTo(map)
         .bindPopup('<strong>Bulevardul Știrbei Vodă 5, 200352 Craiova</strong>');
 
-      // Fly in on scroll – smooth and slow, triggers when user scrolls to the map
+      setTimeout(function () { map.invalidateSize(); }, 100);
+    }
+
+    (function () {
+      var contactSection = document.getElementById('contact');
+      if (!contactSection) return;
+      var mapStarted = false;
       var mapObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            setTimeout(function () {
-              map.flyTo([44.3131, 23.7883], 15, { duration: 12, easeLinearity: 0.02 });
-            }, 400);
+          if (entry.isIntersecting && !mapStarted) {
+            mapStarted = true;
+            loadLeafletAssets(initLocationMap);
             mapObserver.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.25 });
-      mapObserver.observe(mapEl);
+      }, { rootMargin: '200px' });
+      mapObserver.observe(contactSection);
     })();
 
       </script>

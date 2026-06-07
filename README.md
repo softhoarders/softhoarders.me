@@ -4,7 +4,8 @@
 A single-page static website for Soft Hoarders — the FTC Robotics team from Craiova, Romania. The site presents the team's mission, achievements, upcoming events, sponsors, and team roster.
 
 ## What this site contains
-- [index.html](index.html) — single-page site: hero, goals, stats, timeline of competitions, sponsors, contact and team information.
+- [index.html](index.html) — single-page site: about, programs, goals, achievements, competitions, team, sponsors, and contact.
+- [images/robot.webp](images/robot.webp) — optimized hero robot image (~96KB WebP, resized from 4000×4000)
 - [LICENSE](LICENSE) — project license
 
 ## Purpose
@@ -36,6 +37,9 @@ For the full team roster, roles, and bios, please see the Team section in [index
 
 ## Contact
 Contact details and social links are available on the site itself — check the footer of [index.html](index.html) for the preferred channels.
+
+## Google Ad Grants notes
+The site includes About and Programs sections, clear navigation, CTAs, and performance optimizations (lazy-loaded map/API, local WebP hero image). After deploying, rerun [PageSpeed Insights](https://pagespeed.web.dev/) on mobile before resubmitting your Ad Grants activation request.
 
 ## License
 See [LICENSE](LICENSE) for license and usage terms.

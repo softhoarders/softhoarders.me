@@ -1196,13 +1196,67 @@
       justify-content: center;
     }
 
+    .team-org {
+      margin-top: 28px;
+    }
+
+    .team-org-columns-wrap {
+      position: relative;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .team-col-label {
+      text-align: center;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: rgba(255, 255, 255, 0.55);
+      margin-bottom: 12px;
+    }
+
+    .team-org-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0 8px;
+      position: relative;
+    }
+
+    .team-org-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .team-org-cell .team-member {
+      width: 100%;
+      max-width: 220px;
+    }
+
+    .team-org-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      width: 100%;
+    }
+
+    .team-org-row .team-member {
+      flex: 0 1 190px;
+      max-width: 220px;
+    }
+
     .team-member {
       border-radius: var(--radius-lg);
       padding: 24px 16px 20px;
       border: 1px solid rgba(34, 197, 94, 0.12);
       background: rgba(5, 14, 23, 0.8);
       text-align: center;
-      cursor: pointer;
       position: relative;
       z-index: 1;
       transition: border-color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
@@ -1305,8 +1359,8 @@
     }
 
     .team-member-avatar {
-      width: 76px;
-      height: 76px;
+      width: 96px;
+      height: 96px;
       border-radius: 50%;
       margin: 0 auto 14px;
       background: linear-gradient(135deg, rgba(34, 197, 94, 0.22), rgba(8, 47, 73, 0.65));
@@ -1317,13 +1371,128 @@
       font-weight: 700;
       color: var(--accent);
       border: 2px solid rgba(34, 197, 94, 0.2);
-      transition: border-color 0.22s ease, box-shadow 0.22s ease;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.25s ease;
+      transform-origin: center center;
     }
 
-    .team-member:hover .team-member-avatar,
-    .team-member.expanded .team-member-avatar {
-      border-color: rgba(34, 197, 94, 0.55);
-      box-shadow: 0 0 22px rgba(34, 197, 94, 0.22);
+    .team-member-avatar img {
+      width: 130%;
+      height: 130%;
+      object-fit: cover;
+      object-position: center 12%;
+      display: block;
+      transition: transform 0.25s ease;
+    }
+
+    .team-member-avatar.avatar-tight img {
+      width: 112%;
+      height: 112%;
+      object-position: center 18%;
+    }
+
+    @media (hover: hover) {
+      .team-member-avatar:hover {
+        transform: scale(1.2);
+        z-index: 10;
+      }
+    }
+
+    .team-photo-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      background: rgba(2, 6, 12, 0.28);
+      backdrop-filter: blur(18px) saturate(1.15);
+      -webkit-backdrop-filter: blur(18px) saturate(1.15);
+      cursor: pointer;
+    }
+
+    .team-photo-lightbox[hidden] {
+      display: none;
+    }
+
+    .team-photo-lightbox-inner {
+      position: relative;
+      width: min(72vw, 400px);
+      cursor: default;
+    }
+
+    .team-photo-lightbox-avatar {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.22), rgba(8, 47, 73, 0.65));
+      border: 3px solid rgba(34, 197, 94, 0.32);
+      box-shadow: 0 28px 72px rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .team-photo-lightbox-img {
+      display: block;
+      width: 130%;
+      height: 130%;
+      object-fit: cover;
+      object-position: center 12%;
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+    }
+
+    .team-photo-lightbox-avatar.is-tight .team-photo-lightbox-img {
+      width: 112%;
+      height: 112%;
+      object-position: center 18%;
+    }
+
+    .team-photo-lightbox-back {
+      position: absolute;
+      top: -6px;
+      left: -6px;
+      z-index: 3;
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(11, 18, 28, 0.78);
+      backdrop-filter: blur(14px) saturate(1.4);
+      -webkit-backdrop-filter: blur(14px) saturate(1.4);
+      color: #f9fafb;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .team-photo-lightbox-back svg {
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.25;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .team-photo-lightbox-back:hover {
+      background: rgba(11, 18, 28, 0.92);
+      border-color: rgba(34, 197, 94, 0.38);
+      transform: translateX(-2px);
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(34, 197, 94, 0.12);
+    }
+
+    .team-photo-lightbox-back:active {
+      transform: translateX(-1px) scale(0.97);
     }
 
     .team-member-name {
@@ -1334,10 +1503,11 @@
     }
 
     .team-member-role {
-      font-size: 0.75rem;
+      font-size: 0.68rem;
       color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
+      line-height: 1.45;
     }
 
     .social-links {
@@ -1877,35 +2047,143 @@
             A diverse group of students from "Frații Buzești" National College, united by a passion for robotics,
             engineering, and community impact.
           </p>
-          <h3 class="team-group-title" data-i18n="team.leaders_title">Team Leaders</h3>
-          <div class="team-grid">
-            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">IA</div><div class="team-member-name">Ian</div><div class="team-member-desc" data-i18n="team.ian"></div></div>
-            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">RA</div><div class="team-member-name">Rareș</div><div class="team-member-desc" data-i18n="team.rares_lead"></div></div>
-          </div>
+          <div class="team-org">
+            <div class="team-org-columns-wrap">
+              <div class="team-org-grid">
+                <div class="team-org-cell">
+                  <div class="team-col-label">Hardware</div>
+                  <div class="team-member">
+                    <div class="team-member-avatar avatar-tight" tabindex="0" role="button" aria-label="Enlarge Rares A photo"><img src="/team_photos/Rares%20A.webp" alt="Rares A" width="96" height="96" loading="lazy" decoding="async"></div>
+                    <div class="team-member-name">Rares A</div>
+                    <div class="team-member-role">Hardware Leader<br>Lead CAD Designer</div>
+                  </div>
+                </div>
+                <div class="team-org-cell">
+                  <div class="team-col-label">Non-technical</div>
+                  <div class="team-member">
+                    <div class="team-member-avatar" tabindex="0" role="button" aria-label="Enlarge Alisia photo"><img src="/team_photos/Alisia.webp" alt="Alisia" width="96" height="96" loading="lazy" decoding="async"></div>
+                    <div class="team-member-name">Alisia</div>
+                    <div class="team-member-role">Team Captain<br>Outreach Coord.</div>
+                  </div>
+                </div>
+                <div class="team-org-cell">
+                  <div class="team-col-label">Software</div>
+                  <div class="team-member">
+                    <div class="team-member-avatar" tabindex="0" role="button" aria-label="Enlarge Luca photo"><img src="/team_photos/Luca.webp" alt="Luca" width="96" height="96" loading="lazy" decoding="async"></div>
+                    <div class="team-member-name">Luca</div>
+                    <div class="team-member-role">Software Leader<br>Project Manager</div>
+                  </div>
+                </div>
 
-          <h3 class="team-group-title" data-i18n="team.members_title">Members</h3>
-          <div class="team-grid">
-            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">AL</div><div class="team-member-name">Alisia</div><div class="team-member-desc" data-i18n="team.alisia"></div></div>
-            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">EC</div><div class="team-member-name">Ecaterina</div><div class="team-member-desc" data-i18n="team.ecaterina"></div></div>
-            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">VL</div><div class="team-member-name">Vlad</div><div class="team-member-desc" data-i18n="team.vlad1"></div></div>
-            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">TE</div><div class="team-member-name">Teo</div><div class="team-member-desc" data-i18n="team.teo"></div></div>
-            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">AN</div><div class="team-member-name">Annia</div><div class="team-member-desc" data-i18n="team.annia"></div></div>
-            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">RO</div><div class="team-member-name">Robert</div><div class="team-member-desc" data-i18n="team.robert"></div></div>
-            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">RA</div><div class="team-member-name">Rareș</div><div class="team-member-desc" data-i18n="team.rares1"></div></div>
-            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">CA</div><div class="team-member-name">Candidatu Luca</div><div class="team-member-desc" data-i18n="team.candidatu"></div></div>
-            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">VL</div><div class="team-member-name">Vlad</div><div class="team-member-desc" data-i18n="team.vlad2"></div></div>
-            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">AL</div><div class="team-member-name">Alexia</div><div class="team-member-desc" data-i18n="team.alexia"></div></div>
-            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">AG</div><div class="team-member-name">Agatha</div><div class="team-member-desc" data-i18n="team.agatha"></div></div>
-            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">KA</div><div class="team-member-name">Karina</div><div class="team-member-desc" data-i18n="team.karina"></div></div>
-            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">MA</div><div class="team-member-name">Matei</div><div class="team-member-desc" data-i18n="team.matei"></div></div>
-            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">RA</div><div class="team-member-name">Rareș</div><div class="team-member-desc" data-i18n="team.rares2"></div></div>
-            <div class="team-member" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">VL</div><div class="team-member-name">Vladimir</div><div class="team-member-desc" data-i18n="team.vladimir"></div></div>
-          </div>
+                <div class="team-org-cell">
+                  <div class="team-member">
+                    <div class="team-member-avatar" tabindex="0" role="button" aria-label="Enlarge Matei photo"><img src="/team_photos/Matei.webp" alt="Matei" width="96" height="96" loading="lazy" decoding="async"></div>
+                    <div class="team-member-name">Matei</div>
+                    <div class="team-member-role">Hardware<br>QA</div>
+                  </div>
+                </div>
+                <div class="team-org-cell">
+                  <div class="team-member">
+                    <div class="team-member-avatar" tabindex="0" role="button" aria-label="Enlarge Ian photo"><img src="/team_photos/Ian.webp" alt="Ian" width="96" height="96" loading="lazy" decoding="async"></div>
+                    <div class="team-member-name">Ian</div>
+                    <div class="team-member-role">Non-Technical Leader<br>FR &amp; Scrum Master</div>
+                  </div>
+                </div>
+                <div class="team-org-cell">
+                  <div class="team-member">
+                    <div class="team-member-avatar"><img src="/team_photos/David.webp" alt="David" width="96" height="96" loading="lazy" decoding="async"></div>
+                    <div class="team-member-name">David</div>
+                    <div class="team-member-role">Software<br>Developer</div>
+                  </div>
+                </div>
 
-          <h3 class="team-group-title" data-i18n="team.mentors_title">Mentors</h3>
-          <div class="team-grid">
-            <div class="team-member pop-up" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">AU</div><div class="team-member-name">Aurora Simon</div><div class="team-member-desc" data-i18n="team.aurora"></div></div>
-            <div class="team-member pop-up" onclick="this.classList.toggle('expanded')"><div class="team-member-avatar">PO</div><div class="team-member-name">Popoi Liviu</div><div class="team-member-desc" data-i18n="team.popoi"></div></div>
+                <div class="team-org-cell">
+                  <div class="team-member">
+                    <div class="team-member-avatar"><img src="/team_photos/Rares%20T.webp" alt="Rares T" width="96" height="96" loading="lazy" decoding="async"></div>
+                    <div class="team-member-name">Rares T</div>
+                    <div class="team-member-role">Hardware<br>CAD Designer</div>
+                  </div>
+                </div>
+                <div class="team-org-cell">
+                  <div class="team-member">
+                    <div class="team-member-avatar" tabindex="0" role="button" aria-label="Enlarge Robert photo"><img src="/team_photos/Robert.webp" alt="Robert" width="96" height="96" loading="lazy" decoding="async"></div>
+                    <div class="team-member-name">Robert</div>
+                    <div class="team-member-role">Non-Technical<br>Graphic Designer</div>
+                  </div>
+                </div>
+                <div class="team-org-cell">
+                  <div class="team-member">
+                    <div class="team-member-avatar"><img src="/team_photos/Vladimir.webp" alt="Vladimir" width="96" height="96" loading="lazy" decoding="async"></div>
+                    <div class="team-member-name">Vladimir</div>
+                    <div class="team-member-role">Software<br>Subsystems Programmer</div>
+                  </div>
+                </div>
+
+                <div class="team-org-cell">
+                  <div class="team-member">
+                    <div class="team-member-avatar"><img src="/team_photos/Mateo.webp" alt="Mateo" width="96" height="96" loading="lazy" decoding="async"></div>
+                    <div class="team-member-name">Mateo</div>
+                    <div class="team-member-role">Hardware<br>QA</div>
+                  </div>
+                </div>
+                <div class="team-org-cell">
+                  <div class="team-member">
+                    <div class="team-member-avatar" tabindex="0" role="button" aria-label="Enlarge Teodora photo"><img src="/team_photos/Teodora.webp" alt="Teodora" width="96" height="96" loading="lazy" decoding="async"></div>
+                    <div class="team-member-name">Teodora</div>
+                    <div class="team-member-role">Non-Technical<br>Social Media Manager</div>
+                  </div>
+                </div>
+                <div class="team-org-cell">
+                  <div class="team-member">
+                    <div class="team-member-avatar"><img src="/team_photos/Paul.webp" alt="Paul" width="96" height="96" loading="lazy" decoding="async"></div>
+                    <div class="team-member-name">Paul</div>
+                    <div class="team-member-role">Software<br>Autonomous Programmer</div>
+                  </div>
+                </div>
+
+                <div class="team-org-cell">
+                  <div class="team-member">
+                    <div class="team-member-avatar"><img src="/team_photos/Bia.webp" alt="Bia" width="96" height="96" loading="lazy" decoding="async"></div>
+                    <div class="team-member-name">Bia</div>
+                    <div class="team-member-role">Hardware<br>3D Modelling</div>
+                  </div>
+                </div>
+                <div class="team-org-cell">
+                  <div class="team-member">
+                    <div class="team-member-avatar" tabindex="0" role="button" aria-label="Enlarge Livia photo"><img src="/team_photos/Livia.webp" alt="Livia" width="96" height="96" loading="lazy" decoding="async"></div>
+                    <div class="team-member-name">Livia</div>
+                    <div class="team-member-role">Non-Technical<br>Graphic Designer</div>
+                  </div>
+                </div>
+                <div class="team-org-cell"></div>
+
+                <div class="team-org-cell">
+                  <div class="team-member">
+                    <div class="team-member-avatar" tabindex="0" role="button" aria-label="Enlarge Vlad photo"><img src="/team_photos/Vlad.webp" alt="Vlad" width="96" height="96" loading="lazy" decoding="async"></div>
+                    <div class="team-member-name">Vlad</div>
+                    <div class="team-member-role">Hardware<br>Manufacturer</div>
+                  </div>
+                </div>
+                <div class="team-org-cell">
+                  <div class="team-member">
+                    <div class="team-member-avatar" tabindex="0" role="button" aria-label="Enlarge Ale photo"><img src="/team_photos/Ale.webp" alt="Ale" width="96" height="96" loading="lazy" decoding="async"></div>
+                    <div class="team-member-name">Ale</div>
+                    <div class="team-member-role">Non-Technical<br>Outreach</div>
+                  </div>
+                </div>
+                <div class="team-org-cell"></div>
+
+                <div class="team-org-cell">
+                  <div class="team-member">
+                    <div class="team-member-avatar" tabindex="0" role="button" aria-label="Enlarge Rares M photo"><img src="/team_photos/Rares%20M.webp" alt="Rares M" width="96" height="96" loading="lazy" decoding="async"></div>
+                    <div class="team-member-name">Rares M</div>
+                    <div class="team-member-role">Hardware<br>Manufacturer</div>
+                  </div>
+                </div>
+                <div class="team-org-cell"></div>
+                <div class="team-org-cell"></div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -2005,6 +2283,17 @@
         </div>
       </div>
     </footer>
+  </div>
+
+  <div id="teamPhotoLightbox" class="team-photo-lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="Team member photo">
+    <div class="team-photo-lightbox-inner">
+      <button type="button" class="team-photo-lightbox-back" aria-label="Close photo">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="team-photo-lightbox-avatar">
+        <img class="team-photo-lightbox-img" src="" alt="">
+      </div>
+    </div>
   </div>
 
   <script>
@@ -2380,6 +2669,66 @@
             }, 60);
           }
         });
+      });
+    })();
+
+    // Team avatar lightbox
+    (function () {
+      var lightbox = document.getElementById('teamPhotoLightbox');
+      if (!lightbox) return;
+
+      var backBtn = lightbox.querySelector('.team-photo-lightbox-back');
+      var avatarFrame = lightbox.querySelector('.team-photo-lightbox-avatar');
+      var lightboxImg = lightbox.querySelector('.team-photo-lightbox-img');
+
+      function openLightbox(src, alt, isTight) {
+        lightboxImg.src = src;
+        lightboxImg.alt = alt || '';
+        avatarFrame.classList.toggle('is-tight', !!isTight);
+        lightbox.hidden = false;
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.hidden = true;
+        lightbox.setAttribute('aria-hidden', 'true');
+        lightboxImg.removeAttribute('src');
+        avatarFrame.classList.remove('is-tight');
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('.team-member-avatar').forEach(function (avatar) {
+        if (!avatar.hasAttribute('tabindex')) {
+          avatar.setAttribute('tabindex', '0');
+        }
+        avatar.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var img = avatar.querySelector('img');
+          if (!img) return;
+          openLightbox(img.src, img.alt, avatar.classList.contains('avatar-tight'));
+        });
+        avatar.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            avatar.click();
+          }
+        });
+      });
+
+      lightbox.addEventListener('click', closeLightbox);
+      avatarFrame.addEventListener('click', function (e) {
+        e.stopPropagation();
+      });
+      backBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        closeLightbox();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !lightbox.hidden) {
+          closeLightbox();
+        }
       });
     })();
 

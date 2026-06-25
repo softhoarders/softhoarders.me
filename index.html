@@ -2487,9 +2487,13 @@ border-radius:var(--radius-lg);
           if (href && href.startsWith('#')) {
             e.preventDefault();
             var node = document.querySelector(href);
-            if (node) setTimeout(function () {
-              window.scrollTo({ top: node.offsetTop - 70, behavior: 'smooth' });
-            }, 60);
+            if (node) {
+              var top = node.getBoundingClientRect().top + window.scrollY - 70;
+              closeSidebar();
+              setTimeout(function () {
+                window.scrollTo({ top: top, behavior: 'smooth' });
+              }, 60);
+            }
           }
         });
       });
@@ -2555,29 +2559,6 @@ border-radius:var(--radius-lg);
       });
     })();
 
-    // Team member popover edge alignment
-    (function () {
-      function alignTeamPopovers() {
-        document.querySelectorAll('.team-member').forEach(function (card) {
-          card.classList.remove('pop-left', 'pop-right');
-          var rect = card.getBoundingClientRect();
-          var popW = Math.min(500, window.innerWidth - 48);
-          var halfPop = popW / 2;
-          var cardCenterX = rect.left + rect.width / 2;
-          var halfCard = rect.width / 2;
-          // Set arrow offset relative to card edge for edge-aligned popovers
-          card.style.setProperty('--card-arrow', Math.round(halfCard - 6) + 'px');
-          if (cardCenterX - halfPop < 16) {
-            card.classList.add('pop-left');
-          } else if (cardCenterX + halfPop > window.innerWidth - 16) {
-            card.classList.add('pop-right');
-          }
-        });
-      }
-      alignTeamPopovers();
-      window.addEventListener('resize', alignTeamPopovers);
-    })();
-
     // Smooth scroll for nav buttons/links
     document.querySelectorAll("[data-scroll], header a[href^='#'], .sponsors-contact a[href^='#']").forEach(function (el) {
       el.addEventListener("click", function (e) {
@@ -2585,8 +2566,9 @@ border-radius:var(--radius-lg);
         var target = this.getAttribute("data-scroll") || this.getAttribute("href");
         var node = document.querySelector(target);
         if (!node) return;
+        var top = node.getBoundingClientRect().top + window.scrollY - 80;
         window.scrollTo({
-          top: node.offsetTop - 80,
+          top: top,
           behavior: "smooth"
         });
       });
